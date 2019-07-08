@@ -41,10 +41,8 @@ function searchFilm(film) {
       if (response.status !== 200) {
         return;
       }
-      
-      
+
       const data = await response.json();
-      console.log(data.results)
       store.films.set(data.results);
     }
   );
@@ -83,7 +81,8 @@ document.querySelector(".search-film").addEventListener("click", () => {
       poster.classList.add("image");
       poster.setAttribute(
         "src",
-        `https://image.tmdb.org/t/p/w300/${film.poster_path ||'9Tl1O1tfeu8zBh1rSS4lPbJzwTM.jpg'}`
+        `https://image.tmdb.org/t/p/w300/${film.poster_path ||
+          "9Tl1O1tfeu8zBh1rSS4lPbJzwTM.jpg"}`
       );
       containerImage.appendChild(poster);
       containerImage.appendChild(overlay);
@@ -132,15 +131,22 @@ document.querySelector(".search-film").addEventListener("click", () => {
       });
 
       moreBtn.addEventListener("click", e => {
-        requestFilm(`/movie/${film.id}`, `append_to_response=credits`, data => {
-          store.more.set(data);
-        });
+        requestFilm(
+          `/movie/${film.id}`,
+          `append_to_response=credits,videos`,
+          data => {
+
+            store.more.set(data);
+          }
+        );
       });
 
       recommendedBtn.addEventListener("click", e => {
-        requestFilm(`/movie/${film.id}/recommendations`, undefined, data =>
+        requestFilm(`/movie/${film.id}/recommendations`, undefined, data =>{
+        console.log(data)
+
           store.recommendations.set(data.results)
-        );
+        });
       });
 
       filmListNode.appendChild(filmNode);
@@ -148,83 +154,141 @@ document.querySelector(".search-film").addEventListener("click", () => {
   });
 });
 
-store.more.onChange((films) => {
-
-  while (wrapper.lastChild) {
-    wrapper.removeChild(wrapper.lastChild);
-  }
+store.more.onChange(films => {
+  console.log(films);
+ 
   ///create contaner film
   const containerMoreFilm = document.createElement("div");
-  containerMoreFilm.classList.add('container-more'); 
+  containerMoreFilm.classList.add("container-more");
+  const backgroundMoreFilm = document.createElement('div');
+  backgroundMoreFilm.classList.add('background-container__more')
+  ///containerMoreFilm.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500/${films.backdrop_path})`;
+
   ///create poster film
   const poster = document.createElement("img");
-  poster.classList.add("container-more__poster"); 
-  poster.setAttribute(  "src", `https://image.tmdb.org/t/p/w300/${films.poster_path ||'9Tl1O1tfeu8zBh1rSS4lPbJzwTM.jpg'}`
+  poster.classList.add("container-more__poster");
+  poster.setAttribute(
+    "src",
+    `https://image.tmdb.org/t/p/w300/${films.poster_path ||
+      "9Tl1O1tfeu8zBh1rSS4lPbJzwTM.jpg"}`
   );
-  
-   /// create info film
-  
-  const infoFilmBlock = document.createElement('div');
-  infoFilmBlock.classList.add('container-more__info');
-  
-  /// create info inner 
-  const infoInner = document.createElement('div');
-  infoInner.classList.add('info-inner')
 
-    /// create info inner components 
-    const titleFilm = document.createElement('h3');
-    titleFilm.classList.add('info-inner__title');
-     const releaseFilm =document.createElement('span')
-     releaseFilm.classList.add('info-inner__release')
-    const ratingFilm = document.createElement('div');
-    ratingFilm.classList.add('info-inner__rating');
-    const overviewFilm = document.createElement('div');
-    overviewFilm.classList.add('info-inner__overview');
-  /// inner text info inner components 
+  /// create info film
+
+  const infoFilmBlock = document.createElement("div");
+  infoFilmBlock.classList.add("container-more__info");
+
+  /// create info inner
+  const infoInner = document.createElement("div");
+  infoInner.classList.add("info-inner");
+
+  /// create info inner components
+  const titleFilm = document.createElement("h3");
+  titleFilm.classList.add("info-inner__title");
+  const releaseFilm = document.createElement("span");
+  releaseFilm.classList.add("info-inner__release");
+  const ratingFilm = document.createElement("div");
+  ratingFilm.classList.add("info-inner__rating");
+  const overviewFilm = document.createElement("div");
+  overviewFilm.classList.add("info-inner__overview");
+  /// inner text info inner components
   titleFilm.innerText = films.title;
   ratingFilm.innerText = `Рейтинг зрителей ${films.vote_average}`;
-  releaseFilm.innerText =`(${films.release_date.slice(0, 4)})`
-  overviewFilm.innerText =  films.overview;
+  releaseFilm.innerText = `(${films.release_date.slice(0, 4)})`;
+  overviewFilm.innerText = films.overview;
 
-  ////create actor 
+  ////// create genres 
+  const innerGenres = document.createElement('div')
+  innerGenres.classList.add('info-inner__genres')
+  films.genres.forEach((genre)=>{
+const genres = document.createElement('span')
+genres.classList.add('item-genres');
+genres.innerText = genre.name;
+innerGenres.appendChild(genres)
+  });
+
  
-  const innerActors = document.createElement('div');
-  innerActors.classList.add('info-inner__actors');
+  //////////////////create actor
 
-   const titleActors = document.createElement('h4');
-   titleActors.innerText = 'Актерский состав'
-   innerActors.appendChild(titleActors)
+  const innerActors = document.createElement("div");
+  innerActors.classList.add("info-inner__actors");
 
-  films.credits.cast.slice(0,5).forEach((actor)=>{
-    console.log(actor)
-    const itemActors  = document.createElement('div');
-    itemActors.classList.add('actors-item')
-     const actorCharacter = document.createElement('div');
-    const actorName = document.createElement('div');
-    const actorImage = document.createElement('img');
-    actorImage.classList.add('actors-img')
-    actorCharacter.classList.add('actors-character')
-    actorName.classList.add('actors-name') 
-    actorImage.setAttribute(  "src", `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
+  const titleActors = document.createElement("h4");
+  titleActors.innerText = "В главной роли";
+  innerActors.appendChild(titleActors);
+
+  films.credits.cast.slice(0, 5).forEach(actor => {
+    const itemActors = document.createElement("div");
+    itemActors.classList.add("actors-item");
+    const actorCharacter = document.createElement("span");
+    const actorName = document.createElement("span");
+    const actorImage = document.createElement("img");
+    actorImage.classList.add("actors-img");
+    actorCharacter.classList.add("actors-character");
+    actorName.classList.add("actors-name");
+    actorImage.setAttribute(
+      "src",
+      `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
     );
-   actorCharacter.innerText = actor.character;
-  actorName.innerText = actor.name;
-  itemActors.appendChild(actorCharacter)
-  itemActors.appendChild(actorImage)
-  itemActors.appendChild(actorName)
-  innerActors.appendChild(itemActors)
-  infoInner.appendChild(titleFilm)
-  infoInner.appendChild(releaseFilm)
-  infoInner.appendChild(ratingFilm)
-  infoInner.appendChild(overviewFilm)
-  infoInner.appendChild(innerActors)
-  infoFilmBlock.appendChild(infoInner)
-  containerMoreFilm.appendChild(poster);
-  containerMoreFilm.appendChild(infoFilmBlock);
-  wrapper.appendChild(containerMoreFilm);
-  })
+    actorCharacter.innerText = actor.character;
+    actorName.innerText = actor.name;
+    itemActors.appendChild(actorImage);
+    itemActors.appendChild(actorCharacter);
+    itemActors.appendChild(actorName);
+    innerActors.appendChild(itemActors);
+  });
+////////////////////////////create  crew
+const innerCrew = document.createElement("div");
+innerCrew.classList.add("info-inner__crew");
+const titleCrew = document.createElement("h4");
+  titleCrew.innerText = "Cъемочная группа";
+  innerCrew.appendChild(titleCrew);
+films.credits.crew.slice(0, 5).forEach(crew => {
+    const crewName = document.createElement('div');
+    crewName.classList.add('name-crew');
+    crewName.innerText = crew.name;
+    const crewDepartment = document.createElement('div');
+    crewDepartment.classList.add('department-crew');
+    crewDepartment.innerText = crew.department;
+    const crewImage = document.createElement('img');
+    crewImage.classList.add('crew-image');
+    crewImage.setAttribute(
+      "src",
+      `https://image.tmdb.org/t/p/w200/${crew.profile_path}`
+    );
+    const crewItem = document.createElement('div');
+    crewItem.classList.add('crew-item');
+    crewItem.appendChild(crewImage);
+    crewItem.appendChild(crewName);
+    crewItem.appendChild(crewDepartment);
+    innerCrew.appendChild(crewItem)
+});
+//////////////append all  
+    infoInner.appendChild(titleFilm);
+    infoInner.appendChild(releaseFilm);
+    infoInner.appendChild(ratingFilm);
+    infoInner.appendChild(overviewFilm);
+    infoInner.appendChild(innerGenres);
+    infoInner.appendChild(innerActors);
+    infoInner.appendChild(innerCrew)
+    infoFilmBlock.appendChild(infoInner);
+    containerMoreFilm.appendChild(poster);
+    containerMoreFilm.appendChild(infoFilmBlock);
+    backgroundMoreFilm.appendChild(containerMoreFilm);
+    document.querySelector('.container-main').appendChild(backgroundMoreFilm)
+
+});
+
+store.films.onChange(() => {
+  document.querySelector(".header-hero").style.position = "relative";
 });
 
 
 
+window.addEventListener('click', (e)=>{
+if(e.target.className === 'background-container__more'){
+  document.querySelector('.container-main').removeChild(document.querySelector('.container-main').lastChild);
+  
+}
 
+})
