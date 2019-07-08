@@ -284,11 +284,18 @@ store.films.onChange(() => {
 });
 
 
-
+function closeMoreFilm(){
 window.addEventListener('click', (e)=>{
 if(e.target.className === 'background-container__more'){
-  document.querySelector('.container-main').removeChild(document.querySelector('.container-main').lastChild);
-  
+  document.querySelector('.container-main').removeChild(document.querySelector('.container-main').lastChild); 
+}
+})
+window.addEventListener('keydown', (e)=>{
+if(e.key  === "Escape"){
+  document.querySelector('.container-main').removeChild(document.querySelector('.container-main').lastChild); 
 }
 
 })
+}
+
+closeMoreFilm()
