@@ -96,9 +96,16 @@ button:hover{
 }
 
 .wrapper {
+  display: flex;
+  flex-direction: column-reverse;
   padding-top: 50px;
 }
-
+.title-recommendations__name, .title-similar__name{
+color: white;
+text-align: center;
+font-size: 40px;
+padding: 20px 0 40px 0;
+}
 .film-list {
   display: flex;
   flex-wrap: wrap;

@@ -31,7 +31,9 @@ const SEARCH_PARAMS = `api_key=${API_KEY}&language=ru`;
 const store = {
   films: new Observable(),
   recommendations: new Observable(),
+  recommendationsName: new Observable(),
   similar: new Observable(),
+  similarName:new Observable(),
   more: new Observable()
 };
 
@@ -125,9 +127,11 @@ document.querySelector(".search-film").addEventListener("click", () => {
       filmNode.appendChild(moreBtn);
 
       similarBtn.addEventListener("click", e => {
-        requestFilm(`/movie/${film.id}/similar`, undefined, data =>
+        requestFilm(`/movie/${film.id}/similar`, undefined, data =>{
           store.similar.set(data.results)
-        );
+          store.similarName.set(film.title)
+
+        });
       });
 
       moreBtn.addEventListener("click", e => {
@@ -143,9 +147,9 @@ document.querySelector(".search-film").addEventListener("click", () => {
 
       recommendedBtn.addEventListener("click", e => {
         requestFilm(`/movie/${film.id}/recommendations`, undefined, data =>{
-        console.log(data)
-
           store.recommendations.set(data.results)
+          store.recommendationsName.set(film.title)
+
         });
       });
 
@@ -161,8 +165,6 @@ store.more.onChange(films => {
   containerMoreFilm.classList.add("container-more");
   const backgroundMoreFilm = document.createElement('div');
   backgroundMoreFilm.classList.add('background-container__more')
-  ///containerMoreFilm.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500/${films.backdrop_path})`;
-  containerMoreFilm.style.backgroundColor = 'black';
 
   ///create poster film
   const poster = document.createElement("img");
@@ -172,8 +174,17 @@ store.more.onChange(films => {
     `https://image.tmdb.org/t/p/w300/${films.poster_path ||
       "9Tl1O1tfeu8zBh1rSS4lPbJzwTM.jpg"}`
   );
+////// create additionally block
+const additionallyBlock = document.createElement('div');
+additionallyBlock.classList.add('container-more__additionally');
+ const runtime = document.createElement('span');
+ runtime.classList.add('additionally-inner__runtime');
+ runtime.innerText = `продолжительность: ${films.runtime} минут`;
 
-  /// create info film
+
+////// inner additionally block
+additionallyBlock.appendChild(runtime)
+  /////// create info film
 
   const infoFilmBlock = document.createElement("div");
   infoFilmBlock.classList.add("container-more__info");
@@ -281,12 +292,13 @@ closeButton.innerHTML = '&times;';
     infoInner.appendChild(innerCrew)
     infoFilmBlock.appendChild(infoInner);
     containerMoreFilm.appendChild(poster);
+    containerMoreFilm.appendChild(additionallyBlock);
     containerMoreFilm.appendChild(infoFilmBlock);
     containerMoreFilm.appendChild(closeButton);
     
     backgroundMoreFilm.appendChild(containerMoreFilm);
     document.querySelector('.container-main').appendChild(backgroundMoreFilm)
-
+////
     function closeMoreFilm(){
       window.addEventListener('click', (e)=>{
       if(e.target.className === 'background-container__more'){
@@ -310,3 +322,20 @@ store.films.onChange(() => {
 });
 
 
+store.similarName.onChange((similarName) => {
+
+ const titleSimilarName =  document.createElement('div');
+ titleSimilarName.classList.add('title-similar__name');
+ titleSimilarName.innerText =`фильмы похожие на ${similarName}`;
+ document.querySelector('.wrapper').appendChild(titleSimilarName)
+  ;
+});
+store.recommendationsName.onChange((recommendationsName) => {
+console.log(recommendationsName)
+  const titleRecommendationsName =  document.createElement('div');
+  titleRecommendationsName.classList.add('title-recommendations__name');
+  titleRecommendationsName.innerText =`рекомендации по ${recommendationsName}`;
+  document.querySelector('.wrapper').appendChild(titleRecommendationsName)
+   ;
+ });
+ 
