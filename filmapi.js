@@ -156,13 +156,13 @@ document.querySelector(".search-film").addEventListener("click", () => {
 
 store.more.onChange(films => {
   console.log(films);
- 
   ///create contaner film
   const containerMoreFilm = document.createElement("div");
   containerMoreFilm.classList.add("container-more");
   const backgroundMoreFilm = document.createElement('div');
   backgroundMoreFilm.classList.add('background-container__more')
   ///containerMoreFilm.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500/${films.backdrop_path})`;
+  containerMoreFilm.style.backgroundColor = 'black';
 
   ///create poster film
   const poster = document.createElement("img");
@@ -198,12 +198,15 @@ store.more.onChange(films => {
   overviewFilm.innerText = films.overview;
 
   ////// create genres 
+  const textGenres = document.createElement('span')
+  textGenres.innerText = "Жанры: "
   const innerGenres = document.createElement('div')
   innerGenres.classList.add('info-inner__genres')
+  innerGenres.appendChild(textGenres)
   films.genres.forEach((genre)=>{
 const genres = document.createElement('span')
 genres.classList.add('item-genres');
-genres.innerText = genre.name;
+genres.innerText =  genre.name;
 innerGenres.appendChild(genres)
   });
 
@@ -263,6 +266,11 @@ films.credits.crew.slice(0, 5).forEach(crew => {
     crewItem.appendChild(crewDepartment);
     innerCrew.appendChild(crewItem)
 });
+////////create button close
+const closeButton = document.createElement('span')
+closeButton.classList.add('close-button')
+closeButton.innerHTML = '&times;';
+
 //////////////append all  
     infoInner.appendChild(titleFilm);
     infoInner.appendChild(releaseFilm);
@@ -274,8 +282,26 @@ films.credits.crew.slice(0, 5).forEach(crew => {
     infoFilmBlock.appendChild(infoInner);
     containerMoreFilm.appendChild(poster);
     containerMoreFilm.appendChild(infoFilmBlock);
+    containerMoreFilm.appendChild(closeButton);
+    
     backgroundMoreFilm.appendChild(containerMoreFilm);
     document.querySelector('.container-main').appendChild(backgroundMoreFilm)
+
+    function closeMoreFilm(){
+      window.addEventListener('click', (e)=>{
+      if(e.target.className === 'background-container__more'){
+        document.querySelector('.container-main').removeChild(document.querySelector('.container-main').lastChild); 
+      }
+      })
+      closeButton.addEventListener('click', ()=>{
+        document.querySelector('.container-main').removeChild(document.querySelector('.container-main').lastChild); 
+
+      })
+      }
+      
+      closeMoreFilm()
+
+
 
 });
 
@@ -284,18 +310,3 @@ store.films.onChange(() => {
 });
 
 
-function closeMoreFilm(){
-window.addEventListener('click', (e)=>{
-if(e.target.className === 'background-container__more'){
-  document.querySelector('.container-main').removeChild(document.querySelector('.container-main').lastChild); 
-}
-})
-window.addEventListener('keydown', (e)=>{
-if(e.key  === "Escape"){
-  document.querySelector('.container-main').removeChild(document.querySelector('.container-main').lastChild); 
-}
-
-})
-}
-
-closeMoreFilm()
