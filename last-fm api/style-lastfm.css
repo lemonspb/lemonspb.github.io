@@ -1,0 +1,322 @@
+html {
+  scroll-behavior: smooth; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif; }
+
+.container {
+  flex: 1 0 auto;
+  padding: 0 40px; }
+
+.artist-name {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 40px;
+  font-family: "Prosto One", cursive;
+  margin-bottom: 90px; }
+
+h3 {
+  font-family: "Prosto One", cursive;
+  translate: display 1s;
+  display: none;
+  margin: 100px 0 0 0;
+  color: #ffffff;
+  text-align: center;
+  font-size: 40px;
+  padding-bottom: 10px; }
+
+.sticky {
+  padding-top: 20px;
+  position: fixed;
+  top: 0;
+  width: 90%; }
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  padding-top: 66px;
+  padding-bottom: 66px;
+  color: #fff;
+  background-color: #d3d3d3;
+  height: 100%;
+  max-height: 500px;
+  min-height: 380px;
+  z-index: 0; }
+  .hero:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+    z-index: 1; }
+  .hero__background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; }
+  .hero .wrapper__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #232a34; }
+  .hero__content {
+    max-width: 650px;
+    width: 100%;
+    z-index: 2; }
+    .hero__content .hero__title {
+      display: block;
+      font-size: 36px;
+      line-height: 48px;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-weight: 300;
+      font-weight: 700; }
+    .hero__content .hero__search-container {
+      transition: padding 1s ease;
+      max-width: 650px;
+      display: flex;
+      flex: 1 1 100%; }
+      .hero__content .hero__search-container .searchInput {
+        display: block;
+        font-size: 16px;
+        line-height: 25px;
+        margin-top: 0;
+        margin-bottom: 9px;
+        font-weight: 300;
+        margin-bottom: 0;
+        text-decoration: none;
+        border: none;
+        border-radius: 2px;
+        padding: 8px 16px;
+        padding-right: 0;
+        width: 100%;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: none; }
+        .hero__content .hero__search-container .searchInput::placeholder {
+          font-family: "Montserrat", sans-serif;
+          color: black;
+          font-weight: 500; }
+      .hero__content .hero__search-container .searchButton {
+        background: #fff;
+        color: #1a1a1a;
+        line-height: 1;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
+        padding: 11px 24px;
+        margin: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border: none;
+        box-shadow: none;
+        min-width: 40px; }
+
+.tags-artist {
+  margin: 40px 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; }
+  .tags-artist span {
+    cursor: pointer;
+    padding-right: 10px;
+    color: white;
+    font-size: 16px; }
+    .tags-artist span:hover {
+      color: red;
+      transition: 0.8s color; }
+
+.artists-by-tags {
+  border-top: solid white;
+  border-width: 1px;
+  margin-top: 20px;
+  padding-top: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; }
+  .artists-by-tags span {
+    cursor: pointer;
+    padding-right: 10px;
+    color: white;
+    font-size: 16px; }
+    .artists-by-tags span:hover {
+      color: red;
+      transition: 0.8s color; }
+
+.albums {
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  padding: 0; }
+  @media (max-width: 700px) {
+    .albums {
+      align-items: center; } }
+  .albums .item-album {
+    transition: all 2s;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 20px;
+    padding-left: 5px;
+    transition: display 2s; }
+    .albums .item-album a {
+      font-size: 16px;
+      display: flex;
+      align-items: flex-start;
+      color: #ffffff;
+      text-decoration: none;
+      text-align: center;
+      margin-bottom: 12px;
+      transition: color 1s; }
+      .albums .item-album a:hover {
+        color: red; }
+      @media (max-width: 700px) {
+        .albums .item-album a {
+          align-items: center; } }
+    .albums .item-album .list-track {
+      transition: display 2s ease;
+      margin: 0;
+      max-height: 300px;
+      display: block;
+      color: white; }
+      @media (max-width: 700px) {
+        .albums .item-album .list-track {
+          margin: 40px 0;
+          max-height: auto; } }
+    .albums .item-album .album-image {
+      transition: display 2s ease;
+      cursor: pointer;
+      margin: 100px 0;
+      display: flex;
+      flex-direction: row; }
+      @media (max-width: 700px) {
+        .albums .item-album .album-image {
+          flex-direction: column;
+          align-items: center; } }
+      .albums .item-album .album-image img {
+        border: 1px solid #ffffff; }
+
+.tracks {
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 1px;
+  padding: 0;
+  color: red;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column; }
+  @media (max-width: 700px) {
+    .tracks {
+      display: block;
+      padding-left: 40px; } }
+  .tracks li {
+    padding-bottom: 10px; }
+    .tracks li a {
+      width: 100%;
+      color: #ffffff;
+      text-decoration: none; }
+  .tracks span {
+    color: white; }
+
+.similar {
+  max-width: 700px;
+  margin: 0 auto;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 20px; }
+  .similar .similar-artist {
+    cursor: pointer;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    transition: color 1s;
+    color: white; }
+    .similar .similar-artist:hover {
+      color: red; }
+
+.bio .biography {
+  overflow: hidden;
+  height: auto;
+  font-family: "Montserrat", sans-serif;
+  color: #ffffff;
+  line-height: 2;
+  padding: 30px 0;
+  font-size: 21px; }
+
+.bio .still {
+  color: tomato;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  cursor: pointer; }
+
+.footer__inner {
+  flex: 0 0 auto;
+  width: 100%;
+  background-color: black;
+  color: white; }
+  .footer__inner span {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 20px; }
+
+.upArrow {
+  padding: 10px;
+  width: 50px;
+  transition: display 1s ease;
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  z-index: 99;
+  border: 1px solid black;
+  outline: none;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  border-radius: 100%;
+  font-size: 35px; }
+  .upArrow .icon svg {
+    transition: 0.7s all;
+    transform: rotate(180deg); }
+    .upArrow .icon svg:hover {
+      fill: red; }
+
+.visible {
+  display: block; }

@@ -1,0 +1,73 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#000000">
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Prosto+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-lastfm.css">
+
+</head>
+
+<body>
+  <header class='hero'>
+    <div class="hero__background"> 
+    <video autoplay loop muted class="wrapper__video">
+    <!-- <source src="//vimeo-hp-videos.global.ssl.fastly.net/3/3.mp4"> -->
+      <source src='/last-fm api/video/2.mp4' type="video/mp4">
+    </video>
+  </div>
+    <div class='hero__content'>
+      <h1 class='hero__title'>Введите название исполнителя</h1>
+      <div class='hero__search-container'>  
+      <input type="text" class="searchInput" placeholder="">
+      <button class="searchButton">
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></button>
+    </div>
+    </div>
+  </header>
+<div class="container">
+  <div class="tags-artist"></div>
+  <h3>Tоп 5 альбомов</h3>
+  <div class='artist-name'></div>
+  <div class="albums"></div>
+
+  <h3>Tоп 15 песен</h3>
+  <div class='artist-name'></div>
+
+  <ol class='tracks'></ol>
+  <h3> Артисты похожие на</h3>
+  <div class='artist-name'></div>
+
+<div class='similar'></div>
+  <h3>Биография</h3>
+  <div class='artist-name'></div>
+
+  <div class='bio'></div>
+</div>
+<button  class="upArrow" >
+  <i class="icon">
+    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+       viewBox="0 0 512.171 512.171" style="enable-background:new 0 0 512.171 512.171;" xml:space="preserve">
+    <g>
+      <g>
+        <path d="M479.046,283.925c-1.664-3.989-5.547-6.592-9.856-6.592H352.305V10.667C352.305,4.779,347.526,0,341.638,0H170.971
+          c-5.888,0-10.667,4.779-10.667,10.667v266.667H42.971c-4.309,0-8.192,2.603-9.856,6.571c-1.643,3.989-0.747,8.576,2.304,11.627
+          l212.8,213.504c2.005,2.005,4.715,3.136,7.552,3.136s5.547-1.131,7.552-3.115l213.419-213.504
+          C479.793,292.501,480.71,287.915,479.046,283.925z"/>
+      </g>
+    </g>
+   
+    </svg>
+  </i>
+    </button>
+
+  <footer class='footer__inner'><span>Misha Skopenko</span></footer>
+  <script src="style.js"></script>
+  <script src="js.js"></script>
+
+</body>
+
+</html>
