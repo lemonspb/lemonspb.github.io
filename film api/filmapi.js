@@ -58,12 +58,16 @@ filmInput.addEventListener("keyup", e => {
   if (e.key === "Enter") {
     scrollDown();
     searchFilm(filmInput.value);
+    paginationVisible('none');
+
   }
 });
 document.querySelector(".search-film").addEventListener("click", () => {
   scrollDown();
 
   searchFilm(filmInput.value);
+  paginationVisible('none');
+
 });
 
 [store.films, store.recommendations, store.similar].forEach(filmsObservable => {
