@@ -56,14 +56,12 @@ const wrapper = document.querySelector(".wrapper");
 const filmInput = document.querySelector(".film-input");
 filmInput.addEventListener("keyup", e => {
   if (e.key === "Enter") {
-    scrollDown();
     searchFilm(filmInput.value);
     paginationVisible('none');
 
   }
 });
 document.querySelector(".search-film").addEventListener("click", () => {
-  scrollDown();
 
   searchFilm(filmInput.value);
   paginationVisible('none');
@@ -74,9 +72,9 @@ document.querySelector(".search-film").addEventListener("click", () => {
   filmsObservable.onChange(films => {
     const filmListNode = document.createElement("div");
     filmListNode.classList.add("film-list");
-   /* while (filmListNode.firstChild) {
+    while (filmListNode.firstChild) {
       filmListNode.removeChild(filmListNode.firstChild);
-    } */
+    } 
     while (wrapper.firstChild) {
       wrapper.removeChild(wrapper.firstChild);
     }
@@ -180,6 +178,8 @@ document.querySelector(".search-film").addEventListener("click", () => {
 store.more.onChange(films => {
   console.log(films);
   ///create contaner film
+  const containerMoreLeft = document.createElement('div');
+  containerMoreLeft.classList.add('container-more__left');
   const containerMoreFilm = document.createElement("div");
   containerMoreFilm.classList.add("container-more");
   const backgroundMoreFilm = document.createElement("div");
@@ -198,10 +198,31 @@ store.more.onChange(films => {
   additionallyBlock.classList.add("container-more__additionally");
   const runtime = document.createElement("span");
   runtime.classList.add("additionally-inner__runtime");
-  runtime.innerText = `продолжительность: ${films.runtime} минут`;
+  runtime.innerText = `Продолжительность: ${films.runtime} мин`;
+///reveunue 
+const revenue = document.createElement('span');
+revenue.classList.add('additionally-inner__revenue')
+films.revenue?revenue.innerText = `Сборы: $${films.revenue.toLocaleString('en')}`: revenue.innerText =  'Сборы: информация отсутствует'
 
+///budget
+const budget = document.createElement('span');
+budget.classList.add('additionally-inner__budget')
+films.budget?budget.innerText = `Бюджет: $${films.budget.toLocaleString('en')}`: budget.innerText =  'Бюджет: информация отсутствует'
+////tagline film
+const tagline = document.createElement('span');
+tagline.classList.add('additionally-inner__tagline')
+films.tagline?tagline.innerText = `слоган: ${films.tagline}` : tagline.innerText =  'слоган: информация отсутствует'
+////original_title
+const original_title = document.createElement('span');
+original_title.classList.add('additionally-inner__originalTitle')
+films.original_title?original_title.innerText = `оригинальное название: ${films.original_title}` : original_title.innerText =  'оригинальное название:информация отсутствует'
   ////// inner additionally block
   additionallyBlock.appendChild(runtime);
+  additionallyBlock.appendChild(revenue);
+  additionallyBlock.appendChild(budget);
+  additionallyBlock.appendChild(tagline);
+  additionallyBlock.appendChild(original_title);
+  containerMoreLeft.appendChild(additionallyBlock);
   /////// create info film
 
   const infoFilmBlock = document.createElement("div");
@@ -319,17 +340,16 @@ store.more.onChange(films => {
   infoInner.appendChild(innerActors);
   infoInner.appendChild(innerCrew);
   infoFilmBlock.appendChild(infoInner);
-  containerMoreFilm.appendChild(poster);
-  containerMoreFilm.appendChild(additionallyBlock);
+  containerMoreLeft.appendChild(poster);
+  containerMoreFilm.appendChild(containerMoreLeft);
   containerMoreFilm.appendChild(infoFilmBlock);
   containerMoreFilm.appendChild(closeButton);
 
   backgroundMoreFilm.appendChild(containerMoreFilm);
   document.querySelector(".container-main").appendChild(backgroundMoreFilm);
-  ////close 
+  ////close more modal/////////
   function closeMoreFilm() {
     window.addEventListener("click", e => {
-      debugger
       if (e.target.className === "background-container__more") {
         document
           .querySelector(".container-main")
@@ -346,9 +366,6 @@ store.more.onChange(films => {
   closeMoreFilm();
 });
 
-store.films.onChange(() => {
-  document.querySelector(".header-hero").style.position = "relative";
-});
 
 store.similarName.onChange(similarName => {
   const titleSimilarName = document.createElement("div");
@@ -363,7 +380,4 @@ store.recommendationsName.onChange(recommendationsName => {
   document.querySelector(".wrapper").appendChild(titleRecommendationsName);
 });
 
-function scrollDown() {
-  console.log(document.body.scrollTop);
-  document.body.scrollTop = 1000 + "px";
-}
+
