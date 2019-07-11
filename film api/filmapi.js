@@ -43,9 +43,13 @@ function searchFilm(film) {
       if (response.status !== 200) {
         return;
       }
-
+      const moveSearch = document.createElement('h3');
+      moveSearch.classList.add('movie-search');
+      moveSearch.innerText = `найдено по ${film}` 
       const data = await response.json();
       store.films.set(data.results);
+      document.querySelector('.wrapper').appendChild(moveSearch);
+
     }
   );
 }
@@ -53,11 +57,17 @@ const wrapper = document.querySelector(".wrapper");
 const filmInput = document.querySelector(".film-input");
 filmInput.addEventListener("keyup", e => {
   if (e.key === "Enter") {
+    scrollDown();
     searchFilm(filmInput.value);
+ 
+
   }
 });
 document.querySelector(".search-film").addEventListener("click", () => {
+  scrollDown();
+
   searchFilm(filmInput.value);
+
 });
 
 [store.films, store.recommendations, store.similar].forEach(filmsObservable => {
@@ -154,6 +164,7 @@ document.querySelector(".search-film").addEventListener("click", () => {
       });
 
       filmListNode.appendChild(filmNode);
+ 
     });
   });
 });
@@ -339,3 +350,9 @@ console.log(recommendationsName)
    ;
  });
  
+
+   function scrollDown() {
+  console.log(document.body.scrollTop)
+    document.body.scrollTop = 1000+ 'px';
+  
+};
