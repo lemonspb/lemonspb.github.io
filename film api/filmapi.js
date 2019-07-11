@@ -33,7 +33,7 @@ const store = {
   recommendations: new Observable(),
   recommendationsName: new Observable(),
   similar: new Observable(),
-  similarName:new Observable(),
+  similarName: new Observable(),
   more: new Observable()
 };
 
@@ -43,13 +43,12 @@ function searchFilm(film) {
       if (response.status !== 200) {
         return;
       }
-      const moveSearch = document.createElement('h3');
-      moveSearch.classList.add('movie-search');
-      moveSearch.innerText = `найдено по ${film}` 
+      const moveSearch = document.createElement("h3");
+      moveSearch.classList.add("movie-search");
+      moveSearch.innerText = `найдено по ${film}`;
       const data = await response.json();
       store.films.set(data.results);
-      document.querySelector('.wrapper').appendChild(moveSearch);
-
+      document.querySelector(".wrapper").appendChild(moveSearch);
     }
   );
 }
@@ -59,24 +58,21 @@ filmInput.addEventListener("keyup", e => {
   if (e.key === "Enter") {
     scrollDown();
     searchFilm(filmInput.value);
- 
-
   }
 });
 document.querySelector(".search-film").addEventListener("click", () => {
   scrollDown();
 
   searchFilm(filmInput.value);
-
 });
 
 [store.films, store.recommendations, store.similar].forEach(filmsObservable => {
   filmsObservable.onChange(films => {
     const filmListNode = document.createElement("div");
     filmListNode.classList.add("film-list");
-    while (filmListNode.firstChild) {
+   /* while (filmListNode.firstChild) {
       filmListNode.removeChild(filmListNode.firstChild);
-    }
+    } */
     while (wrapper.firstChild) {
       wrapper.removeChild(wrapper.firstChild);
     }
@@ -137,9 +133,10 @@ document.querySelector(".search-film").addEventListener("click", () => {
       filmNode.appendChild(moreBtn);
 
       similarBtn.addEventListener("click", e => {
-        requestFilm(`/movie/${film.id}/similar`, undefined, data =>{
-          store.similar.set(data.results)
-          store.similarName.set(film.title)
+        requestFilm(`/movie/${film.id}/similar`, undefined, data => {
+          store.similar.set(data.results);
+          store.similarName.set(film.title);
+          paginationVisible('none');
 
         });
       });
@@ -149,22 +146,29 @@ document.querySelector(".search-film").addEventListener("click", () => {
           `/movie/${film.id}`,
           `append_to_response=credits,videos`,
           data => {
-
             store.more.set(data);
           }
         );
       });
-
+      overlay.addEventListener("click", e => {
+        requestFilm(
+          `/movie/${film.id}`,
+          `append_to_response=credits,videos`,
+          data => {
+            store.more.set(data);
+          }
+        );
+      });
       recommendedBtn.addEventListener("click", e => {
-        requestFilm(`/movie/${film.id}/recommendations`, undefined, data =>{
-          store.recommendations.set(data.results)
-          store.recommendationsName.set(film.title)
+        requestFilm(`/movie/${film.id}/recommendations`, undefined, data => {
+          store.recommendations.set(data.results);
+          store.recommendationsName.set(film.title);
+          paginationVisible('none');
 
         });
       });
 
       filmListNode.appendChild(filmNode);
- 
     });
   });
 });
@@ -174,8 +178,8 @@ store.more.onChange(films => {
   ///create contaner film
   const containerMoreFilm = document.createElement("div");
   containerMoreFilm.classList.add("container-more");
-  const backgroundMoreFilm = document.createElement('div');
-  backgroundMoreFilm.classList.add('background-container__more')
+  const backgroundMoreFilm = document.createElement("div");
+  backgroundMoreFilm.classList.add("background-container__more");
 
   ///create poster film
   const poster = document.createElement("img");
@@ -185,16 +189,15 @@ store.more.onChange(films => {
     `https://image.tmdb.org/t/p/w300/${films.poster_path ||
       "9Tl1O1tfeu8zBh1rSS4lPbJzwTM.jpg"}`
   );
-////// create additionally block
-const additionallyBlock = document.createElement('div');
-additionallyBlock.classList.add('container-more__additionally');
- const runtime = document.createElement('span');
- runtime.classList.add('additionally-inner__runtime');
- runtime.innerText = `продолжительность: ${films.runtime} минут`;
+  ////// create additionally block
+  const additionallyBlock = document.createElement("div");
+  additionallyBlock.classList.add("container-more__additionally");
+  const runtime = document.createElement("span");
+  runtime.classList.add("additionally-inner__runtime");
+  runtime.innerText = `продолжительность: ${films.runtime} минут`;
 
-
-////// inner additionally block
-additionallyBlock.appendChild(runtime)
+  ////// inner additionally block
+  additionallyBlock.appendChild(runtime);
   /////// create info film
 
   const infoFilmBlock = document.createElement("div");
@@ -219,20 +222,19 @@ additionallyBlock.appendChild(runtime)
   releaseFilm.innerText = `(${films.release_date.slice(0, 4)})`;
   overviewFilm.innerText = films.overview;
 
-  ////// create genres 
-  const textGenres = document.createElement('span')
-  textGenres.innerText = "Жанры: "
-  const innerGenres = document.createElement('div')
-  innerGenres.classList.add('info-inner__genres')
-  innerGenres.appendChild(textGenres)
-  films.genres.forEach((genre)=>{
-const genres = document.createElement('span')
-genres.classList.add('item-genres');
-genres.innerText =  genre.name;
-innerGenres.appendChild(genres)
+  ////// create genres
+  const textGenres = document.createElement("span");
+  textGenres.innerText = "Жанры: ";
+  const innerGenres = document.createElement("div");
+  innerGenres.classList.add("info-inner__genres");
+  innerGenres.appendChild(textGenres);
+  films.genres.forEach(genre => {
+    const genres = document.createElement("span");
+    genres.classList.add("item-genres");
+    genres.innerText = genre.name;
+    innerGenres.appendChild(genres);
   });
 
- 
   //////////////////create actor
 
   const innerActors = document.createElement("div");
@@ -251,10 +253,15 @@ innerGenres.appendChild(genres)
     actorImage.classList.add("actors-img");
     actorCharacter.classList.add("actors-character");
     actorName.classList.add("actors-name");
-    actorImage.setAttribute(
-      "src",
-      `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
-    );
+    actor.profile_path
+      ? actorImage.setAttribute(
+          "src",
+          `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
+        )
+      : actorImage.setAttribute(
+          "src",
+          `https://tonkostipdd.ru/sites/all/themes/autotonkosti/images/d-avatar.png`
+        );
     actorCharacter.innerText = actor.character;
     actorName.innerText = actor.name;
     itemActors.appendChild(actorImage);
@@ -262,97 +269,97 @@ innerGenres.appendChild(genres)
     itemActors.appendChild(actorName);
     innerActors.appendChild(itemActors);
   });
-////////////////////////////create  crew
-const innerCrew = document.createElement("div");
-innerCrew.classList.add("info-inner__crew");
-const titleCrew = document.createElement("h4");
+  ////////////////////////////create  crew
+  const innerCrew = document.createElement("div");
+  innerCrew.classList.add("info-inner__crew");
+  const titleCrew = document.createElement("h4");
   titleCrew.innerText = "Cъемочная группа";
   innerCrew.appendChild(titleCrew);
-films.credits.crew.slice(0, 5).forEach(crew => {
-    const crewName = document.createElement('div');
-    crewName.classList.add('name-crew');
+  films.credits.crew.slice(0, 5).forEach(crew => {
+    const crewName = document.createElement("div");
+    crewName.classList.add("name-crew");
     crewName.innerText = crew.name;
-    const crewDepartment = document.createElement('div');
-    crewDepartment.classList.add('department-crew');
+    const crewDepartment = document.createElement("div");
+    crewDepartment.classList.add("department-crew");
     crewDepartment.innerText = crew.department;
-    const crewImage = document.createElement('img');
-    crewImage.classList.add('crew-image');
-    crewImage.setAttribute(
-      "src",
-      `https://image.tmdb.org/t/p/w200/${crew.profile_path}`
-    );
-    const crewItem = document.createElement('div');
-    crewItem.classList.add('crew-item');
+    const crewImage = document.createElement("img");
+    crewImage.classList.add("crew-image");
+    crew.profile_path
+      ? crewImage.setAttribute(
+          "src",
+          `https://image.tmdb.org/t/p/w200/${crew.profile_path}`
+        )
+      : crewImage.setAttribute(
+          "src",
+          `https://tonkostipdd.ru/sites/all/themes/autotonkosti/images/d-avatar.png`
+        );
+
+    const crewItem = document.createElement("div");
+    crewItem.classList.add("crew-item");
     crewItem.appendChild(crewImage);
     crewItem.appendChild(crewName);
     crewItem.appendChild(crewDepartment);
-    innerCrew.appendChild(crewItem)
-});
-////////create button close
-const closeButton = document.createElement('span')
-closeButton.classList.add('close-button')
-closeButton.innerHTML = '&times;';
+    innerCrew.appendChild(crewItem);
+  });
+  ////////create button close
+  const closeButton = document.createElement("span");
+  closeButton.classList.add("close-button");
+  closeButton.innerHTML = "&times;";
 
-//////////////append all  
-    infoInner.appendChild(titleFilm);
-    infoInner.appendChild(releaseFilm);
-    infoInner.appendChild(ratingFilm);
-    infoInner.appendChild(overviewFilm);
-    infoInner.appendChild(innerGenres);
-    infoInner.appendChild(innerActors);
-    infoInner.appendChild(innerCrew)
-    infoFilmBlock.appendChild(infoInner);
-    containerMoreFilm.appendChild(poster);
-    containerMoreFilm.appendChild(additionallyBlock);
-    containerMoreFilm.appendChild(infoFilmBlock);
-    containerMoreFilm.appendChild(closeButton);
-    
-    backgroundMoreFilm.appendChild(containerMoreFilm);
-    document.querySelector('.container-main').appendChild(backgroundMoreFilm)
-////
-    function closeMoreFilm(){
-      window.addEventListener('click', (e)=>{
-      if(e.target.className === 'background-container__more'){
-        document.querySelector('.container-main').removeChild(document.querySelector('.container-main').lastChild); 
+  //////////////append all
+  infoInner.appendChild(titleFilm);
+  infoInner.appendChild(releaseFilm);
+  infoInner.appendChild(ratingFilm);
+  infoInner.appendChild(overviewFilm);
+  infoInner.appendChild(innerGenres);
+  infoInner.appendChild(innerActors);
+  infoInner.appendChild(innerCrew);
+  infoFilmBlock.appendChild(infoInner);
+  containerMoreFilm.appendChild(poster);
+  containerMoreFilm.appendChild(additionallyBlock);
+  containerMoreFilm.appendChild(infoFilmBlock);
+  containerMoreFilm.appendChild(closeButton);
+
+  backgroundMoreFilm.appendChild(containerMoreFilm);
+  document.querySelector(".container-main").appendChild(backgroundMoreFilm);
+  ////close 
+  function closeMoreFilm() {
+    window.addEventListener("click", e => {
+      debugger
+      if (e.target.className === "background-container__more") {
+        document
+          .querySelector(".container-main")
+          .removeChild(document.querySelector(".container-main").lastChild);
       }
-      })
-      closeButton.addEventListener('click', ()=>{
-        document.querySelector('.container-main').removeChild(document.querySelector('.container-main').lastChild); 
+    });
+    closeButton.addEventListener("click", () => {
+      document
+        .querySelector(".container-main")
+        .removeChild(document.querySelector(".container-main").lastChild);
+    });
+  }
 
-      })
-      }
-      
-      closeMoreFilm()
-
-
-
+  closeMoreFilm();
 });
 
 store.films.onChange(() => {
   document.querySelector(".header-hero").style.position = "relative";
 });
 
-
-store.similarName.onChange((similarName) => {
-
- const titleSimilarName =  document.createElement('div');
- titleSimilarName.classList.add('title-similar__name');
- titleSimilarName.innerText =`фильмы похожие на ${similarName}`;
- document.querySelector('.wrapper').appendChild(titleSimilarName)
-  ;
+store.similarName.onChange(similarName => {
+  const titleSimilarName = document.createElement("div");
+  titleSimilarName.classList.add("title-similar__name");
+  titleSimilarName.innerText = `фильмы похожие на ${similarName}`;
+  document.querySelector(".wrapper").appendChild(titleSimilarName);
 });
-store.recommendationsName.onChange((recommendationsName) => {
-console.log(recommendationsName)
-  const titleRecommendationsName =  document.createElement('div');
-  titleRecommendationsName.classList.add('title-recommendations__name');
-  titleRecommendationsName.innerText =`рекомендации по ${recommendationsName}`;
-  document.querySelector('.wrapper').appendChild(titleRecommendationsName)
-   ;
- });
- 
+store.recommendationsName.onChange(recommendationsName => {
+  const titleRecommendationsName = document.createElement("div");
+  titleRecommendationsName.classList.add("title-recommendations__name");
+  titleRecommendationsName.innerText = `рекомендации по ${recommendationsName}`;
+  document.querySelector(".wrapper").appendChild(titleRecommendationsName);
+});
 
-   function scrollDown() {
-  console.log(document.body.scrollTop)
-    document.body.scrollTop = 1000+ 'px';
-  
-};
+function scrollDown() {
+  console.log(document.body.scrollTop);
+  document.body.scrollTop = 1000 + "px";
+}
