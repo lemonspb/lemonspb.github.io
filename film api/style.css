@@ -359,6 +359,7 @@ padding: 10px 0;
   align-items: flex-end;
 }
 .container-more__additionally{
+  padding-bottom: 30px;
   line-height: 1.9;
   font-size: 18px;
   display: flex;
