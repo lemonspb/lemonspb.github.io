@@ -17,23 +17,23 @@ function differentMovieSearch(request, title, page) {
 }
 
 document.querySelector(".item-icon.upcoming").addEventListener("click", () => {
-  document.documentElement.scrollTop  = 400 ; 
+  document.documentElement.scrollTop = 400;
   differentMovieSearch("upcoming", "Скоро в кино", 1);
   paginationVisible("flex");
-  scrollDown()
+  scrollDown();
 });
 document
   .querySelector(".item-icon.now_playing")
   .addEventListener("click", () => {
     differentMovieSearch("now_playing", "Сейчас в кино");
     paginationVisible("flex");
-    scrollDown()
+    scrollDown();
   });
 
 document.querySelector(".item-icon.popular").addEventListener("click", () => {
   differentMovieSearch("popular", "Популярные сейчас", 1);
   paginationVisible("flex");
-  scrollDown()
+  scrollDown();
 });
 
 document.querySelectorAll(".page-item").forEach(paginator => {
@@ -60,22 +60,33 @@ document.querySelector(".your-best").addEventListener("click", () => {
   document.querySelector(".modal").style.display = "block";
   const bestFilmList = JSON.parse(localStorage.getItem("storageFilm"));
   const titleFilm = [];
-  const mosalContent = document.querySelector('.modal-body')
-  console.log(delete bestFilmList[11551]);
+  const modalContent = document.querySelector(".modal-body");
   for (let key in bestFilmList) {
     titleFilm.push(bestFilmList[key]);
   }
-   
-  titleFilm.forEach((x, i, arr) => {  
-    console.log(x[0])
-    document.querySelector('.block-add__title').innerText = x[0];
-    document.querySelector('.block-add__img').src = x[1];
-    document.querySelector('.block-add__overlay').innerText = x[2];
-    const blockAdd = document.querySelector('.block-add')
-    
-  });
+console.log(titleFilm)
+  titleFilm.forEach((x, i, arr) => {
+      ///create content modal your add fiml
+    const blockAdd= document.createElement('div');
+    blockAdd.classList.add('block-add');
+    const blockAddTitle= document.createElement('div');
+    blockAddTitle.classList.add('block-add__title');
+    blockAddTitle.innerText = x[0];
+    const blockAddImg = document.createElement('img');
+    blockAddImg.classList.add('block-add__img');
+    blockAddImg.setAttribute('src', `${x[1]}`);
+    const blockAddOvelay = document.createElement('div');
+    blockAddOvelay.classList.add('block-add__img');
+    blockAddOvelay.innerText = x[2];
+    blockAdd.appendChild(blockAddTitle);
+    blockAdd.appendChild(blockAddImg);
+    blockAdd.appendChild(blockAddOvelay);
+    modalContent.appendChild(blockAdd);
 
+  });
 });
+
+
 document.querySelector(".close").addEventListener("click", () => {
   document.querySelector(".modal").style.display = "none";
 });
@@ -85,24 +96,23 @@ window.addEventListener("click", e => {
   }
 });
 
-
-
 const arrow = document.querySelector(".upArrow");
 
-
-window.addEventListener('scroll', () => {
-    scrollFunction();
+window.addEventListener("scroll", () => {
+  scrollFunction();
 });
 
 function scrollFunction() {
-  document.body.scrollTop > 200 || document.documentElement.scrollTop > 200? arrow.classList.add('visible') : arrow.classList.remove('visible');
+  document.body.scrollTop > 200 || document.documentElement.scrollTop > 200
+    ? arrow.classList.add("visible")
+    : arrow.classList.remove("visible");
 }
 
-arrow.addEventListener('click', (e) => {
-  document.body.scrollTop = 0; 
+arrow.addEventListener("click", e => {
+  document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 });
 function scrollDown() {
-  document.documentElement.scrollTop  = 800 ; 
-  document.body.scrollTop = 800; 
+  document.documentElement.scrollTop = 800;
+  document.body.scrollTop = 800;
 }
