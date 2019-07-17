@@ -57,16 +57,14 @@ const filmInput = document.querySelector(".film-input");
 filmInput.addEventListener("keyup", e => {
   if (e.key === "Enter") {
     searchFilm(filmInput.value);
-    paginationVisible('none');
-    scrollDown()
-
+    paginationVisible("none");
+    scrollDown();
   }
 });
 document.querySelector(".search-film").addEventListener("click", () => {
-  scrollDown()
+  scrollDown();
   searchFilm(filmInput.value);
-  paginationVisible('none');
-
+  paginationVisible("none");
 });
 
 [store.films, store.recommendations, store.similar].forEach(filmsObservable => {
@@ -75,7 +73,7 @@ document.querySelector(".search-film").addEventListener("click", () => {
     filmListNode.classList.add("film-list");
     while (filmListNode.firstChild) {
       filmListNode.removeChild(filmListNode.firstChild);
-    } 
+    }
     while (wrapper.firstChild) {
       wrapper.removeChild(wrapper.firstChild);
     }
@@ -139,8 +137,7 @@ document.querySelector(".search-film").addEventListener("click", () => {
         requestFilm(`/movie/${film.id}/similar`, undefined, data => {
           store.similar.set(data.results);
           store.similarName.set(film.title);
-          paginationVisible('none');
-
+          paginationVisible("none");
         });
       });
 
@@ -166,8 +163,7 @@ document.querySelector(".search-film").addEventListener("click", () => {
         requestFilm(`/movie/${film.id}/recommendations`, undefined, data => {
           store.recommendations.set(data.results);
           store.recommendationsName.set(film.title);
-          paginationVisible('none');
-
+          paginationVisible("none");
         });
       });
 
@@ -178,20 +174,22 @@ document.querySelector(".search-film").addEventListener("click", () => {
 
 store.more.onChange(films => {
   console.log(films);
+
   ///create contaner film
-  const containerMoreLeft = document.createElement('div');
-  containerMoreLeft.classList.add('container-more__left');
+
+  const containerMoreLeft = document.createElement("div");
+  containerMoreLeft.classList.add("container-more__left");
   const containerMoreFilm = document.createElement("div");
   containerMoreFilm.classList.add("container-more");
   const backgroundMoreFilm = document.createElement("div");
   backgroundMoreFilm.classList.add("background-container__more");
-//create button add
-const blockAddBest = document.createElement('div');
-blockAddBest.classList.add('info-inner__add');
-const buttonAddBestFilm = document.createElement('button');
-buttonAddBestFilm.classList.add('add-best-film');
-buttonAddBestFilm.innerText = 'в избранное';
-blockAddBest.appendChild(buttonAddBestFilm);
+  //create button add
+  const blockAddBest = document.createElement("div");
+  blockAddBest.classList.add("info-inner__add");
+  const buttonAddBestFilm = document.createElement("button");
+  buttonAddBestFilm.classList.add("add-best-film");
+  buttonAddBestFilm.innerText = "в избранное";
+  blockAddBest.appendChild(buttonAddBestFilm);
   ///create poster film
   const poster = document.createElement("img");
   poster.classList.add("container-more__poster");
@@ -206,23 +204,34 @@ blockAddBest.appendChild(buttonAddBestFilm);
   const runtime = document.createElement("span");
   runtime.classList.add("additionally-inner__runtime");
   runtime.innerText = `Продолжительность: ${films.runtime} мин`;
-///reveunue 
-const revenue = document.createElement('span');
-revenue.classList.add('additionally-inner__revenue')
-films.revenue?revenue.innerText = `Сборы: $${films.revenue.toLocaleString('en')}`: revenue.innerText =  'Сборы: информация отсутствует'
+  ///reveunue
+  const revenue = document.createElement("span");
+  revenue.classList.add("additionally-inner__revenue");
+  films.revenue
+    ? (revenue.innerText = `Сборы: $${films.revenue.toLocaleString("en")}`)
+    : (revenue.innerText = "Сборы: информация отсутствует");
 
-///budget
-const budget = document.createElement('span');
-budget.classList.add('additionally-inner__budget')
-films.budget?budget.innerText = `Бюджет: $${films.budget.toLocaleString('en')}`: budget.innerText =  'Бюджет: информация отсутствует'
-////tagline film
-const tagline = document.createElement('span');
-tagline.classList.add('additionally-inner__tagline')
-films.tagline?tagline.innerText = `слоган: ${films.tagline}` : tagline.innerText =  'слоган: информация отсутствует'
-////original_title
-const original_title = document.createElement('span');
-original_title.classList.add('additionally-inner__originalTitle')
-films.original_title?original_title.innerText = `оригинальное название: ${films.original_title}` : original_title.innerText =  'оригинальное название:информация отсутствует'
+  ///budget
+  const budget = document.createElement("span");
+  budget.classList.add("additionally-inner__budget");
+  films.budget
+    ? (budget.innerText = `Бюджет: $${films.budget.toLocaleString("en")}`)
+    : (budget.innerText = "Бюджет: информация отсутствует");
+  ////tagline film
+  const tagline = document.createElement("span");
+  tagline.classList.add("additionally-inner__tagline");
+  films.tagline
+    ? (tagline.innerText = `слоган: ${films.tagline}`)
+    : (tagline.innerText = "слоган: информация отсутствует");
+  ////original_title
+  const original_title = document.createElement("span");
+  original_title.classList.add("additionally-inner__originalTitle");
+  films.original_title
+    ? (original_title.innerText = `оригинальное название: ${
+        films.original_title
+      }`)
+    : (original_title.innerText =
+        "оригинальное название:информация отсутствует");
   ////// inner additionally block
   additionallyBlock.appendChild(runtime);
   additionallyBlock.appendChild(revenue);
@@ -356,27 +365,25 @@ films.original_title?original_title.innerText = `оригинальное наз
   backgroundMoreFilm.appendChild(containerMoreFilm);
   document.querySelector(".container-main").appendChild(backgroundMoreFilm);
 
-//////addBestFilmToLocalStorage
-function addBestFilm(){
-  buttonAddBestFilm.addEventListener("click", () => {
-    const filmName = `${titleFilm.innerText}`;
-    const filmImage = `https://image.tmdb.org/t/p/w300/${films.poster_path}`;
-    const filmOverview = `${films.overview}`
-    const filmId = `${films.id}`;
+  //////addBestFilmToLocalStorage
+  function addBestFilm() {
+    buttonAddBestFilm.addEventListener("click", () => {
+      const filmName = `${titleFilm.innerText}`;
+      const filmImage = `https://image.tmdb.org/t/p/w300/${films.poster_path}`;
+      const filmOverview = `${films.overview}`;
+      const filmId = `${films.id}`;
 
-    const drophistory = JSON.parse(localStorage.getItem("storageFilm")) || {};
+      const drophistory = JSON.parse(localStorage.getItem("storageFilm")) || {};
 
-    drophistory[filmId] = [filmName, filmImage,filmOverview ];
+      drophistory[filmId] = [filmName, filmImage, filmOverview];
 
-    localStorage.setItem("storageFilm", JSON.stringify(drophistory));
-  });
+      localStorage.setItem("storageFilm", JSON.stringify(drophistory));
+    });
+  }
+  addBestFilm();
 
-}
-addBestFilm()
-
-  
   ////close more modal/////////
-function closeMoreFilm() {
+  function closeMoreFilm() {
     window.addEventListener("click", e => {
       if (e.target.className === "background-container__more") {
         document
@@ -394,7 +401,6 @@ function closeMoreFilm() {
   closeMoreFilm();
 });
 
-
 store.similarName.onChange(similarName => {
   const titleSimilarName = document.createElement("div");
   titleSimilarName.classList.add("title-similar__name");
@@ -407,5 +413,3 @@ store.recommendationsName.onChange(recommendationsName => {
   titleRecommendationsName.innerText = `рекомендации по ${recommendationsName}`;
   document.querySelector(".wrapper").appendChild(titleRecommendationsName);
 });
-
-
