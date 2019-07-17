@@ -58,11 +58,12 @@ filmInput.addEventListener("keyup", e => {
   if (e.key === "Enter") {
     searchFilm(filmInput.value);
     paginationVisible('none');
+    scrollDown()
 
   }
 });
 document.querySelector(".search-film").addEventListener("click", () => {
-
+  scrollDown()
   searchFilm(filmInput.value);
   paginationVisible('none');
 
@@ -184,7 +185,13 @@ store.more.onChange(films => {
   containerMoreFilm.classList.add("container-more");
   const backgroundMoreFilm = document.createElement("div");
   backgroundMoreFilm.classList.add("background-container__more");
-
+//create button add
+const blockAddBest = document.createElement('div');
+blockAddBest.classList.add('info-inner__add');
+const buttonAddBestFilm = document.createElement('button');
+buttonAddBestFilm.classList.add('add-best-film');
+buttonAddBestFilm.innerText = 'в избранное';
+blockAddBest.appendChild(buttonAddBestFilm);
   ///create poster film
   const poster = document.createElement("img");
   poster.classList.add("container-more__poster");
@@ -336,6 +343,7 @@ films.original_title?original_title.innerText = `оригинальное наз
   infoInner.appendChild(releaseFilm);
   infoInner.appendChild(ratingFilm);
   infoInner.appendChild(overviewFilm);
+  infoInner.appendChild(blockAddBest);
   infoInner.appendChild(innerGenres);
   infoInner.appendChild(innerActors);
   infoInner.appendChild(innerCrew);
@@ -347,8 +355,28 @@ films.original_title?original_title.innerText = `оригинальное наз
 
   backgroundMoreFilm.appendChild(containerMoreFilm);
   document.querySelector(".container-main").appendChild(backgroundMoreFilm);
+
+//////addBestFilmToLocalStorage
+function addBestFilm(){
+  buttonAddBestFilm.addEventListener("click", () => {
+    const filmName = `${titleFilm.innerText}`;
+    const filmImage = `https://image.tmdb.org/t/p/w300/${films.poster_path}`;
+    const filmOverview = `${films.overview}`
+    const filmId = `${films.id}`;
+
+    const drophistory = JSON.parse(localStorage.getItem("storageFilm")) || {};
+
+    drophistory[filmId] = [filmName, filmImage,filmOverview ];
+
+    localStorage.setItem("storageFilm", JSON.stringify(drophistory));
+  });
+
+}
+addBestFilm()
+
+  
   ////close more modal/////////
-  function closeMoreFilm() {
+function closeMoreFilm() {
     window.addEventListener("click", e => {
       if (e.target.className === "background-container__more") {
         document
