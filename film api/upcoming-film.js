@@ -17,19 +17,23 @@ function differentMovieSearch(request, title, page) {
 }
 
 document.querySelector(".item-icon.upcoming").addEventListener("click", () => {
+  document.documentElement.scrollTop  = 400 ; 
   differentMovieSearch("upcoming", "Скоро в кино", 1);
-  paginationVisible('flex');
+  paginationVisible("flex");
+  scrollDown()
 });
 document
   .querySelector(".item-icon.now_playing")
   .addEventListener("click", () => {
     differentMovieSearch("now_playing", "Сейчас в кино");
-    paginationVisible('flex');
+    paginationVisible("flex");
+    scrollDown()
   });
 
 document.querySelector(".item-icon.popular").addEventListener("click", () => {
   differentMovieSearch("popular", "Популярные сейчас", 1);
-  paginationVisible('flex');
+  paginationVisible("flex");
+  scrollDown()
 });
 
 document.querySelectorAll(".page-item").forEach(paginator => {
@@ -50,4 +54,55 @@ document.querySelectorAll(".page-item").forEach(paginator => {
 
 function paginationVisible(visible) {
   document.querySelector(".page-pagination").style.display = visible;
+}
+
+document.querySelector(".your-best").addEventListener("click", () => {
+  document.querySelector(".modal").style.display = "block";
+  const bestFilmList = JSON.parse(localStorage.getItem("storageFilm"));
+  const titleFilm = [];
+  const mosalContent = document.querySelector('.modal-body')
+  console.log(delete bestFilmList[11551]);
+  for (let key in bestFilmList) {
+    titleFilm.push(bestFilmList[key]);
+  }
+   
+  titleFilm.forEach((x, i, arr) => {  
+    console.log(x[0])
+    document.querySelector('.block-add__title').innerText = x[0];
+    document.querySelector('.block-add__img').src = x[1];
+    document.querySelector('.block-add__overlay').innerText = x[2];
+    const blockAdd = document.querySelector('.block-add')
+    
+  });
+
+});
+document.querySelector(".close").addEventListener("click", () => {
+  document.querySelector(".modal").style.display = "none";
+});
+window.addEventListener("click", e => {
+  if (e.target === document.querySelector(".modal")) {
+    document.querySelector(".modal").style.display = "none";
+  }
+});
+
+
+
+const arrow = document.querySelector(".upArrow");
+
+
+window.addEventListener('scroll', () => {
+    scrollFunction();
+});
+
+function scrollFunction() {
+  document.body.scrollTop > 200 || document.documentElement.scrollTop > 200? arrow.classList.add('visible') : arrow.classList.remove('visible');
+}
+
+arrow.addEventListener('click', (e) => {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0;
+});
+function scrollDown() {
+  document.documentElement.scrollTop  = 800 ; 
+  document.body.scrollTop = 800; 
 }
