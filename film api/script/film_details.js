@@ -47,7 +47,7 @@ store.more.onChange(film => {
             classList: ["additionally-inner__originalTitle"], 
             children: [
               DOM.T(film.original_title
-                  ? `Оригинальное название: $${film.original_title}`
+                  ? `Оригинальное название: ${film.original_title}`
                   : "Оригинальное название: информация отсутствует"),
             ],
           }),
