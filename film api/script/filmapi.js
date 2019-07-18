@@ -97,6 +97,7 @@ function searchFilm(film) {
 }
 const wrapper = document.querySelector(".wrapper");
 const filmInput = document.querySelector(".film-input");
+
 filmInput.addEventListener("keyup", e => {
   if (e.key === "Enter") {
     searchFilm(filmInput.value);
@@ -212,14 +213,12 @@ document.querySelector(".search-film").addEventListener("click", () => {
 });
 
 store.similarName.onChange(similarName => {
-  const titleSimilarName = document.createElement("div");
-  titleSimilarName.classList.add("title-similar__name");
-  titleSimilarName.innerText = `фильмы похожие на ${similarName}`;
+  const titleSimilarName = DOM.E({ type: "div", classList: ["title-similar__name"],
+   children: [DOM.T(`фильмы похожие на ${similarName}`)]});
   document.querySelector(".wrapper").appendChild(titleSimilarName);
 });
 store.recommendationsName.onChange(recommendationsName => {
-  const titleRecommendationsName = document.createElement("div");
-  titleRecommendationsName.classList.add("title-recommendations__name");
-  titleRecommendationsName.innerText = `рекомендации по ${recommendationsName}`;
+  const titleRecommendationsName = DOM.E({ type: "div", classList: ["title-recommendations__name"],
+  children: [DOM.T(`рекомендации по ${recommendationsName}`)]});
   document.querySelector(".wrapper").appendChild(titleRecommendationsName);
 });

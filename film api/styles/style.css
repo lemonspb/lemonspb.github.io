@@ -211,9 +211,20 @@ button.search-film {
 .container-image {
   position: relative;
   width: 100%;
-}
+  overflow:hidden;
+  transition: all 1s ease-out;
 
-.image-film {
+}
+.image {
+  overflow:hidden;
+  transition: all 1s ease-out;
+
+}
+.container-image:hover .image{
+  transform: scale(1.1);
+
+}
+.image {
   display: block;
   width: 100%;
   max-height: auto;
@@ -237,7 +248,7 @@ button.search-film {
 }
 
 .container-image:hover .overlay {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .name-film {

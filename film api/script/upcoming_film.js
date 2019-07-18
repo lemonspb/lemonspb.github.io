@@ -61,9 +61,13 @@ document.querySelector(".your-best").addEventListener("click", () => {
 
   Object.values(bestFilmList).forEach(([title, poster, description, id]) => {
     const BestFilm = DOM.E({ type: "div", classList: ["best-film"], children: [
+      DOM.E({ type: "div", classList: ["best-film__left"], children:[ 
       DOM.E({ type: "h3", classList: ["best-film__title"], children: [DOM.T(title)] }),
-      DOM.E({ type: "div", children: [DOM.T(description)] }),
-      DOM.E({ type: "img", attributes: [["src", poster]] }),
+      DOM.E({ type: "img", classList: ["best-film__img"], attributes: [["src", poster]] }),
+      ]}),
+      DOM.E({ type: "div", classList: ["best-film__right"], children:[ 
+      DOM.E({ type: "h4",  classList: ["best-film__discription"], children: [DOM.T('Описание')] }),
+      DOM.E({ type: "div",  classList: ["best-film__Overview"], children: [DOM.T(description)] }),
       DOM.E({ type: "button", classList: ["best-film__button"],
         children: [DOM.T("удалить")],
         events: [["click", e => {
@@ -71,6 +75,7 @@ document.querySelector(".your-best").addEventListener("click", () => {
           BestFilm.remove();
         }]],
       }),
+    ]}),  
     ]});
     modalContent.appendChild(BestFilm);
   });
