@@ -20,20 +20,17 @@ document.querySelector(".item-icon.upcoming").addEventListener("click", () => {
   document.documentElement.scrollTop = 400;
   differentMovieSearch("upcoming", "Скоро в кино", 1);
   paginationVisible("flex");
-  scrollDown();
 });
 document
   .querySelector(".item-icon.now_playing")
   .addEventListener("click", () => {
     differentMovieSearch("now_playing", "Сейчас в кино");
     paginationVisible("flex");
-    scrollDown();
   });
 
 document.querySelector(".item-icon.popular").addEventListener("click", () => {
   differentMovieSearch("popular", "Популярные сейчас", 1);
   paginationVisible("flex");
-  scrollDown();
 });
 
 document.querySelectorAll(".page-item").forEach(paginator => {
@@ -59,38 +56,23 @@ function paginationVisible(visible) {
 document.querySelector(".your-best").addEventListener("click", () => {
   document.querySelector(".modal").style.display = "block";
   const bestFilmList = JSON.parse(localStorage.getItem("storageFilm"));
-  const addFilm = [];
   const modalContent = document.querySelector(".modal-body");
-  for (let key in bestFilmList) {
-    addFilm.push(bestFilmList[key]);
-  }
+  DOM.removeChildren(modalContent);
 
-  addFilm.forEach((x) => {
-    const BestFilm = document.createElement("div");
-    BestFilm.classList.add("best-film");
-    const BestFilmTitle = document.createElement("h3");
-    BestFilmTitle.classList.add("best-film__title");
-    BestFilmTitle.innerText = x[0];
-    const BestFilmOverlay = document.createElement("div");
-    BestFilmOverlay.classList.add("best-film__overlay");
-    BestFilmOverlay.innerText = x[2];
-    const BestFilmImg = document.createElement("img");
-    BestFilmImg.classList.add("best-film__overlay");
-    BestFilmImg.setAttribute('src', `${x[1]}`)
-    const BestFilmButton = document.createElement("button");
-    BestFilmButton.classList.add('best-film__button')
-    BestFilmButton.setAttribute("data-id", `${x[3]}`);
-    BestFilmButton.innerText = 'удалить';
-    BestFilm.appendChild(BestFilmTitle);
-    BestFilm.appendChild(BestFilmOverlay);
-    BestFilm.appendChild(BestFilmImg);  
-    BestFilm.appendChild(BestFilmButton);
+  Object.values(bestFilmList).forEach(([title, poster, description, id]) => {
+    const BestFilm = DOM.E({ type: "div", classList: ["best-film"], children: [
+      DOM.E({ type: "h3", classList: ["best-film__title"], children: [DOM.T(title)] }),
+      DOM.E({ type: "div", children: [DOM.T(description)] }),
+      DOM.E({ type: "img", attributes: [["src", poster]] }),
+      DOM.E({ type: "button", classList: ["best-film__button"],
+        children: [DOM.T("удалить")],
+        events: [["click", e => {
+          removeFavorite(id) 
+          BestFilm.remove();
+        }]],
+      }),
+    ]});
     modalContent.appendChild(BestFilm);
-    BestFilmButton.addEventListener('click',(e)=>{
-      removeFavorite(e.target.dataset.id) 
-      e.target.parentNode.remove();
-      
-    })
   });
 });
 document.querySelector(".close").addEventListener("click", () => {
