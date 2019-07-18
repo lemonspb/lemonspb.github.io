@@ -2,9 +2,8 @@ html {
   scroll-behavior: smooth;
 }
 
-
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 
   background-color: black;
 }
@@ -38,19 +37,17 @@ button {
 
 button:hover {
   background: #e7e7e7;
-
 }
 
 .active {
   color: blue;
-
 }
 
 .header-hero {
   flex-direction: column-reverse;
   min-height: 800px;
   background-size: auto;
-  background-image: url('./Movie-Posters.jpg');
+  background-image: url("../image/Movie-Posters.jpg");
   width: 100%;
   justify-content: start;
   display: flex;
@@ -68,9 +65,8 @@ button:hover {
   height: 100%;
   width: 100%;
   opacity: 0.9;
-  transition: .5s ease;
+  transition: 0.5s ease;
   background-color: black;
-
 }
 
 .hero-content {
@@ -80,20 +76,19 @@ button:hover {
 
 .hero__search-container {
   display: flex;
-
 }
 
 .your-best {
-  top:5%;
-  right:5%;
-  position:absolute;
+  top: 5%;
+  right: 5%;
+  position: absolute;
   color: red;
   z-index: 1;
   cursor: pointer;
 }
 
 .hero-title {
-  font-family: 'PT Serif', serif;
+  font-family: "PT Serif", serif;
 
   font-size: 55px;
   top: 34%;
@@ -104,9 +99,6 @@ button:hover {
   display: flex;
   justify-content: center;
 }
-
-
-
 
 .film-input {
   outline: none;
@@ -126,7 +118,6 @@ button:hover {
   padding: 2px 16px;
   padding-right: 0;
   width: 100%;
-
 }
 
 button.search-film {
@@ -158,7 +149,6 @@ button.search-film {
 .item-icon:hover {
   cursor: pointer;
 }
-
 
 .item-icon__svg {
   fill: white;
@@ -194,20 +184,19 @@ button.search-film {
   text-align: center;
   font-size: 30px;
   padding: 20px 0 40px 0;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
 }
 
 .film-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-
 }
 
 .film-item {
   height: 100%;
   border: 2px solid #888;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   box-sizing: border-box;
   margin-bottom: 40px;
   display: flex;
@@ -215,7 +204,7 @@ button.search-film {
   margin-left: 10px;
   animation-name: animatetop;
   animation-duration: 1s;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
   outline: 0;
 }
 
@@ -243,7 +232,7 @@ button.search-film {
   height: 100%;
   width: 100%;
   opacity: 0;
-  transition: .5s ease;
+  transition: 0.5s ease;
   background-color: black;
 }
 
@@ -251,12 +240,10 @@ button.search-film {
   opacity: 0.9;
 }
 
-
 .name-film {
   font-size: 25px;
   font-weight: 500;
   padding-bottom: 15px;
-
 }
 
 .release-date {
@@ -285,7 +272,7 @@ button.search-film {
   background-color: #fefefe;
   padding: 0;
   border: 1px solid #888;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   position: relative;
   color: black;
   display: flex;
@@ -293,8 +280,8 @@ button.search-film {
   padding: 40px;
   animation-name: animatetop;
   animation-duration: 0.4s;
-  border-radius: .3rem;
-    outline: 0;
+  border-radius: 0.3rem;
+  outline: 0;
 }
 
 .close-button {
@@ -315,7 +302,6 @@ button.search-film {
 .info-inner__title {
   display: inline;
   margin-right: 5px;
-
 }
 
 .info-inner__release {
@@ -331,8 +317,6 @@ button.search-film {
   padding: 20px 0;
   font-size: 20px;
   line-height: 1.8;
-
-
 }
 
 .info-inner__genres {
@@ -342,7 +326,6 @@ button.search-film {
   align-items: baseline;
   justify-content: flex-end;
   border-bottom: 1px solid white;
-
 }
 
 .item-genres {
@@ -350,7 +333,6 @@ button.search-film {
   color: tomato;
   padding-left: 10px;
 }
-
 
 .info-inner__actors,
 .info-inner__crew {
@@ -389,7 +371,6 @@ button.search-film {
 .department-crew {
   color: tomato;
   padding: 10px 0;
-
 }
 
 .add-best-film {
@@ -421,22 +402,19 @@ button.search-film {
 }
 
 .page-pagination {
-
   display: none;
   justify-content: center;
   align-items: center;
-
 }
 
 .page-link {
   color: black;
 }
 
-@media screen and (max-width:700px) {
+@media screen and (max-width: 700px) {
   .container-more {
     flex-direction: column;
     margin: 0;
-
   }
 
   .container-more__poster {
@@ -458,6 +436,7 @@ button.search-film {
 }
 
 .upArrow {
+  outline: none;
   padding: 10px;
   width: 50px;
   transition: display 1s ease;
@@ -473,18 +452,19 @@ button.search-film {
   cursor: pointer;
   border-radius: 100%;
   font-size: 6px;
- 
 }
 
 .upArrow .icon svg {
   transition: 0.7s all;
   transform: rotate(180deg);
   animation-name: animatetop;
-  animation-duration: 0.5s
+  animation-duration: 0.5s;
+  outline: none;
 }
 
 .upArrow .icon svg:hover {
   fill: red;
+  outline: none;
 }
 
 .visible {
