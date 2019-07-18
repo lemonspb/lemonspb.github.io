@@ -14,6 +14,37 @@ class Observable {
   }
 }
 
+function createElement({ type, classList, attributes, events, children }) {
+  const node = document.createElement(type);
+  if (classList) {
+    node.classList.add(classList);
+  }
+  if (children) {
+    children.forEach(child => node.appendChild(child));
+  }
+  if (attributes) {
+    attributes.forEach(([name, value]) => node.setAttribute(name, value));
+  }
+  if (events) {
+    events.forEach(([name, handler]) => node.addEventListener(name, handler));
+  }
+  return node;
+}
+
+function createTextElement(text) {
+  return document.createTextNode(text);
+}
+
+const DOM = {
+  E: createElement,
+  T: createTextElement,
+  removeChildren(node) {
+    while (node.firstChild) {
+      node.removeChild(node.firstChild);
+    }
+  },
+};
+
 function requestFilm(url, params, callback) {
   fetch(`${BASE_URL}${url}?${SEARCH_PARAMS}&${params}`).then(async response => {
     if (response.status !== 200) {
@@ -37,6 +68,18 @@ const store = {
   more: new Observable()
 };
 
+function addFavorite(id, name, poster, overview, id) {
+  const favorites = JSON.parse(localStorage.getItem("storageFilm")) || {};
+  favorites[id] = [name, poster, overview,id];
+  localStorage.setItem("storageFilm", JSON.stringify(favorites));
+}
+
+function removeFavorite(id) {
+  const favorites = JSON.parse(localStorage.getItem("storageFilm")) || {};
+  delete favorites[id];
+  localStorage.setItem("storageFilm", JSON.stringify(favorites));
+}
+
 function searchFilm(film) {
   fetch(`${BASE_URL}/search/movie?query=${film}&${SEARCH_PARAMS}`).then(
     async response => {
@@ -58,11 +101,9 @@ filmInput.addEventListener("keyup", e => {
   if (e.key === "Enter") {
     searchFilm(filmInput.value);
     paginationVisible("none");
-    scrollDown();
   }
 });
 document.querySelector(".search-film").addEventListener("click", () => {
-  scrollDown();
   searchFilm(filmInput.value);
   paginationVisible("none");
 });
@@ -71,12 +112,8 @@ document.querySelector(".search-film").addEventListener("click", () => {
   filmsObservable.onChange(films => {
     const filmListNode = document.createElement("div");
     filmListNode.classList.add("film-list");
-    while (filmListNode.firstChild) {
-      filmListNode.removeChild(filmListNode.firstChild);
-    }
-    while (wrapper.firstChild) {
-      wrapper.removeChild(wrapper.firstChild);
-    }
+    DOM.removeChildren(filmListNode);
+    DOM.removeChildren(wrapper);
     wrapper.appendChild(filmListNode);
 
     films.forEach((film, i) => {
@@ -169,232 +206,9 @@ document.querySelector(".search-film").addEventListener("click", () => {
 
       filmListNode.appendChild(filmNode);
     });
+
+    scrollDown();
   });
-});
-
-store.more.onChange(films => {
-  console.log(films);
-
-  ///create contaner film
-
-  const containerMoreLeft = document.createElement("div");
-  containerMoreLeft.classList.add("container-more__left");
-  const containerMoreFilm = document.createElement("div");
-  containerMoreFilm.classList.add("container-more");
-  const backgroundMoreFilm = document.createElement("div");
-  backgroundMoreFilm.classList.add("background-container__more");
-  //create button add
-  const blockAddBest = document.createElement("div");
-  blockAddBest.classList.add("info-inner__add");
-  const buttonAddBestFilm = document.createElement("button");
-  buttonAddBestFilm.classList.add("add-best-film");
-  buttonAddBestFilm.innerText = "в избранное";
-  blockAddBest.appendChild(buttonAddBestFilm);
-  ///create poster film
-  const poster = document.createElement("img");
-  poster.classList.add("container-more__poster");
-  poster.setAttribute(
-    "src",
-    `https://image.tmdb.org/t/p/w300/${films.poster_path ||
-      "9Tl1O1tfeu8zBh1rSS4lPbJzwTM.jpg"}`
-  );
-  ////// create additionally block
-  const additionallyBlock = document.createElement("div");
-  additionallyBlock.classList.add("container-more__additionally");
-  const runtime = document.createElement("span");
-  runtime.classList.add("additionally-inner__runtime");
-  runtime.innerText = `Продолжительность: ${films.runtime} мин`;
-  ///reveunue
-  const revenue = document.createElement("span");
-  revenue.classList.add("additionally-inner__revenue");
-  films.revenue
-    ? (revenue.innerText = `Сборы: $${films.revenue.toLocaleString("en")}`)
-    : (revenue.innerText = "Сборы: информация отсутствует");
-
-  ///budget
-  const budget = document.createElement("span");
-  budget.classList.add("additionally-inner__budget");
-  films.budget
-    ? (budget.innerText = `Бюджет: $${films.budget.toLocaleString("en")}`)
-    : (budget.innerText = "Бюджет: информация отсутствует");
-  ////tagline film
-  const tagline = document.createElement("span");
-  tagline.classList.add("additionally-inner__tagline");
-  films.tagline
-    ? (tagline.innerText = `слоган: ${films.tagline}`)
-    : (tagline.innerText = "слоган: информация отсутствует");
-  ////original_title
-  const original_title = document.createElement("span");
-  original_title.classList.add("additionally-inner__originalTitle");
-  films.original_title
-    ? (original_title.innerText = `оригинальное название: ${
-        films.original_title
-      }`)
-    : (original_title.innerText =
-        "оригинальное название:информация отсутствует");
-  ////// inner additionally block
-  additionallyBlock.appendChild(runtime);
-  additionallyBlock.appendChild(revenue);
-  additionallyBlock.appendChild(budget);
-  additionallyBlock.appendChild(tagline);
-  additionallyBlock.appendChild(original_title);
-  containerMoreLeft.appendChild(additionallyBlock);
-  /////// create info film
-
-  const infoFilmBlock = document.createElement("div");
-  infoFilmBlock.classList.add("container-more__info");
-
-  /// create info inner
-  const infoInner = document.createElement("div");
-  infoInner.classList.add("info-inner");
-
-  /// create info inner components
-  const titleFilm = document.createElement("h3");
-  titleFilm.classList.add("info-inner__title");
-  const releaseFilm = document.createElement("span");
-  releaseFilm.classList.add("info-inner__release");
-  const ratingFilm = document.createElement("div");
-  ratingFilm.classList.add("info-inner__rating");
-  const overviewFilm = document.createElement("div");
-  overviewFilm.classList.add("info-inner__overview");
-  /// inner text info inner components
-  titleFilm.innerText = films.title;
-  ratingFilm.innerText = `Рейтинг зрителей ${films.vote_average}`;
-  releaseFilm.innerText = `(${films.release_date.slice(0, 4)})`;
-  overviewFilm.innerText = films.overview;
-
-  ////// create genres
-  const textGenres = document.createElement("span");
-  textGenres.innerText = "Жанры: ";
-  const innerGenres = document.createElement("div");
-  innerGenres.classList.add("info-inner__genres");
-  innerGenres.appendChild(textGenres);
-  films.genres.forEach(genre => {
-    const genres = document.createElement("span");
-    genres.classList.add("item-genres");
-    genres.innerText = genre.name;
-    innerGenres.appendChild(genres);
-  });
-
-  //////////////////create actor
-
-  const innerActors = document.createElement("div");
-  innerActors.classList.add("info-inner__actors");
-
-  const titleActors = document.createElement("h4");
-  titleActors.innerText = "В главной роли";
-  innerActors.appendChild(titleActors);
-
-  films.credits.cast.slice(0, 5).forEach(actor => {
-    const itemActors = document.createElement("div");
-    itemActors.classList.add("actors-item");
-    const actorCharacter = document.createElement("span");
-    const actorName = document.createElement("span");
-    const actorImage = document.createElement("img");
-    actorImage.classList.add("actors-img");
-    actorCharacter.classList.add("actors-character");
-    actorName.classList.add("actors-name");
-    actor.profile_path
-      ? actorImage.setAttribute(
-          "src",
-          `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
-        )
-      : actorImage.setAttribute(
-          "src",
-          `https://tonkostipdd.ru/sites/all/themes/autotonkosti/images/d-avatar.png`
-        );
-    actorCharacter.innerText = actor.character;
-    actorName.innerText = actor.name;
-    itemActors.appendChild(actorImage);
-    itemActors.appendChild(actorCharacter);
-    itemActors.appendChild(actorName);
-    innerActors.appendChild(itemActors);
-  });
-  ////////////////////////////create  crew
-  const innerCrew = document.createElement("div");
-  innerCrew.classList.add("info-inner__crew");
-  const titleCrew = document.createElement("h4");
-  titleCrew.innerText = "Cъемочная группа";
-  innerCrew.appendChild(titleCrew);
-  films.credits.crew.slice(0, 5).forEach(crew => {
-    const crewName = document.createElement("div");
-    crewName.classList.add("name-crew");
-    crewName.innerText = crew.name;
-    const crewDepartment = document.createElement("div");
-    crewDepartment.classList.add("department-crew");
-    crewDepartment.innerText = crew.department;
-    const crewImage = document.createElement("img");
-    crewImage.classList.add("crew-image");
-    crew.profile_path
-      ? crewImage.setAttribute(
-          "src",
-          `https://image.tmdb.org/t/p/w200/${crew.profile_path}`
-        )
-      : crewImage.setAttribute(
-          "src",
-          `https://tonkostipdd.ru/sites/all/themes/autotonkosti/images/d-avatar.png`
-        );
-
-    const crewItem = document.createElement("div");
-    crewItem.classList.add("crew-item");
-    crewItem.appendChild(crewImage);
-    crewItem.appendChild(crewName);
-    crewItem.appendChild(crewDepartment);
-    innerCrew.appendChild(crewItem);
-  });
-  ////////create button close
-  const closeButton = document.createElement("span");
-  closeButton.classList.add("close-button");
-  closeButton.innerHTML = "&times;";
-
-  //////////////append all
-  infoInner.appendChild(titleFilm);
-  infoInner.appendChild(releaseFilm);
-  infoInner.appendChild(ratingFilm);
-  infoInner.appendChild(overviewFilm);
-  infoInner.appendChild(blockAddBest);
-  infoInner.appendChild(innerGenres);
-  infoInner.appendChild(innerActors);
-  infoInner.appendChild(innerCrew);
-  infoFilmBlock.appendChild(infoInner);
-  containerMoreLeft.appendChild(poster);
-  containerMoreFilm.appendChild(containerMoreLeft);
-  containerMoreFilm.appendChild(infoFilmBlock);
-  containerMoreFilm.appendChild(closeButton);
-
-  backgroundMoreFilm.appendChild(containerMoreFilm);
-  document.querySelector(".container-main").appendChild(backgroundMoreFilm);
-
-  //////addBestFilmToLocalStorage
-  function addBestFilm() {
-    buttonAddBestFilm.addEventListener("click", () => {
-      const filmName = `${titleFilm.innerText}`;
-      const filmImage = `https://image.tmdb.org/t/p/w300/${films.poster_path}`;
-      const filmOverview = `${films.overview}`;
-      const filmId = `${films.id}`;
-
-      addFavorite(filmId, filmName, filmImage, filmOverview, filmId)
-    });
-  }
-  addBestFilm();
-
-  ////close more modal/////////
-  function closeMoreFilm() {
-    window.addEventListener("click", e => {
-      if (e.target.className === "background-container__more") {
-        document
-          .querySelector(".container-main")
-          .removeChild(document.querySelector(".container-main").lastChild);
-      }
-    });
-    closeButton.addEventListener("click", () => {
-      document
-        .querySelector(".container-main")
-        .removeChild(document.querySelector(".container-main").lastChild);
-    });
-  }
-
-  closeMoreFilm();
 });
 
 store.similarName.onChange(similarName => {
@@ -409,15 +223,3 @@ store.recommendationsName.onChange(recommendationsName => {
   titleRecommendationsName.innerText = `рекомендации по ${recommendationsName}`;
   document.querySelector(".wrapper").appendChild(titleRecommendationsName);
 });
-
-function addFavorite(id, name, poster, overview, id) {
-  const favorites = JSON.parse(localStorage.getItem("storageFilm")) || {};
-  favorites[id] = [name, poster, overview,id];
-  localStorage.setItem("storageFilm", JSON.stringify(favorites));
-}
-
-function removeFavorite(id) {
-  const favorites = JSON.parse(localStorage.getItem("storageFilm")) || {};
-  delete favorites[id];
-  localStorage.setItem("storageFilm", JSON.stringify(favorites));
-}
