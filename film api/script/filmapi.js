@@ -373,11 +373,7 @@ store.more.onChange(films => {
       const filmOverview = `${films.overview}`;
       const filmId = `${films.id}`;
 
-      const drophistory = JSON.parse(localStorage.getItem("storageFilm")) || {};
-
-      drophistory[filmId] = [filmName, filmImage, filmOverview];
-
-      localStorage.setItem("storageFilm", JSON.stringify(drophistory));
+      addFavorite(filmId, filmName, filmImage, filmOverview, filmId)
     });
   }
   addBestFilm();
@@ -413,3 +409,15 @@ store.recommendationsName.onChange(recommendationsName => {
   titleRecommendationsName.innerText = `рекомендации по ${recommendationsName}`;
   document.querySelector(".wrapper").appendChild(titleRecommendationsName);
 });
+
+function addFavorite(id, name, poster, overview, id) {
+  const favorites = JSON.parse(localStorage.getItem("storageFilm")) || {};
+  favorites[id] = [name, poster, overview,id];
+  localStorage.setItem("storageFilm", JSON.stringify(favorites));
+}
+
+function removeFavorite(id) {
+  const favorites = JSON.parse(localStorage.getItem("storageFilm")) || {};
+  delete favorites[id];
+  localStorage.setItem("storageFilm", JSON.stringify(favorites));
+}

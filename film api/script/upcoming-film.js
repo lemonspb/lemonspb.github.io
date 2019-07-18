@@ -59,34 +59,40 @@ function paginationVisible(visible) {
 document.querySelector(".your-best").addEventListener("click", () => {
   document.querySelector(".modal").style.display = "block";
   const bestFilmList = JSON.parse(localStorage.getItem("storageFilm"));
-  const titleFilm = [];
+  const addFilm = [];
   const modalContent = document.querySelector(".modal-body");
   for (let key in bestFilmList) {
-    titleFilm.push(bestFilmList[key]);
+    addFilm.push(bestFilmList[key]);
   }
-console.log(titleFilm)
-  titleFilm.forEach((x, i, arr) => {
-      ///create content modal your add fiml
-    const blockAdd= document.createElement('div');
-    blockAdd.classList.add('block-add');
-    const blockAddTitle= document.createElement('div');
-    blockAddTitle.classList.add('block-add__title');
-    blockAddTitle.innerText = x[0];
-    const blockAddImg = document.createElement('img');
-    blockAddImg.classList.add('block-add__img');
-    blockAddImg.setAttribute('src', `${x[1]}`);
-    const blockAddOvelay = document.createElement('div');
-    blockAddOvelay.classList.add('block-add__img');
-    blockAddOvelay.innerText = x[2];
-    blockAdd.appendChild(blockAddTitle);
-    blockAdd.appendChild(blockAddImg);
-    blockAdd.appendChild(blockAddOvelay);
-    modalContent.appendChild(blockAdd);
 
+  addFilm.forEach((x) => {
+    const BestFilm = document.createElement("div");
+    BestFilm.classList.add("best-film");
+    const BestFilmTitle = document.createElement("h3");
+    BestFilmTitle.classList.add("best-film__title");
+    BestFilmTitle.innerText = x[0];
+    const BestFilmOverlay = document.createElement("div");
+    BestFilmOverlay.classList.add("best-film__overlay");
+    BestFilmOverlay.innerText = x[2];
+    const BestFilmImg = document.createElement("img");
+    BestFilmImg.classList.add("best-film__overlay");
+    BestFilmImg.setAttribute('src', `${x[1]}`)
+    const BestFilmButton = document.createElement("button");
+    BestFilmButton.classList.add('best-film__button')
+    BestFilmButton.setAttribute("data-id", `${x[3]}`);
+    BestFilmButton.innerText = 'удалить';
+    BestFilm.appendChild(BestFilmTitle);
+    BestFilm.appendChild(BestFilmOverlay);
+    BestFilm.appendChild(BestFilmImg);  
+    BestFilm.appendChild(BestFilmButton);
+    modalContent.appendChild(BestFilm);
+    BestFilmButton.addEventListener('click',(e)=>{
+      removeFavorite(e.target.dataset.id) 
+      e.target.parentNode.remove();
+      
+    })
   });
 });
-
-
 document.querySelector(".close").addEventListener("click", () => {
   document.querySelector(".modal").style.display = "none";
 });
@@ -112,6 +118,7 @@ arrow.addEventListener("click", e => {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 });
+
 function scrollDown() {
   document.documentElement.scrollTop = 800;
   document.body.scrollTop = 800;
