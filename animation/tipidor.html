@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+  <div class='container'>
+<div class="one">Ты</div>
+<div class='two'> Пидор</div>
+  </div>
+  <style>
+      body{
+animation: bodyColor 3s linear infinite 0s;
+
+}
+.one{
+    color: red;
+    top:50%;
+    left: 10%;
+    position: absolute;
+   font-size: 200px;
+   animation: rotateWordsFirst 6s linear infinite 0s;   
+
+}
+ .two{
+    top:50%;
+    left: 30%;
+    position: absolute;
+    color:blue;
+   font-size: 200px; 
+   animation: rotateWordsSecond 6s linear infinite 0s;
+
+}
+@keyframes rotateWordsFirst {
+    0% { opacity: 1; animation-timing-function: ease-in;}
+    8% { opacity: 1;  }
+    19% { opacity: 1; }
+    40% { opacity: 0.5;  }
+    100% { opacity: 0; }
+}
+
+@keyframes rotateWordsSecond {
+    0% { opacity: 0; animation-timing-function: ease-in; }
+    10% { opacity: 0;}
+    20% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+@keyframes bodyColor {
+    0% {background-color: black; }
+    20% {background-color:yellow; }
+    40% {background-color: brown; }
+    60% { background-color: fuchsia; }
+    100% { background-color: darkgray; }
+}
+  </style>
+</body>
+</html>
