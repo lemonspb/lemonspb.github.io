@@ -94,7 +94,7 @@ store.more.onChange(film => {
   /// inner text info inner components
   titleFilm.innerText = film.title;
   ratingFilm.innerText = `Рейтинг зрителей ${film.vote_average}`;
-  releaseFilm.innerText = `(${film.release_date.slice(0, 4)})`;
+ // releaseFilm.innerText = `(${film.release_date.slice(0, 4)})`;
   overviewFilm.innerText = film.overview;
 
   ////// create genres
@@ -183,7 +183,7 @@ store.more.onChange(film => {
 
   //////////////append all
   infoInner.appendChild(titleFilm);
-  infoInner.appendChild(releaseFilm);
+  //infoInner.appendChild(releaseFilm);
   infoInner.appendChild(ratingFilm);
   infoInner.appendChild(overviewFilm);
   infoInner.appendChild(blockAddBest);

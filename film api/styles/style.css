@@ -144,9 +144,12 @@ button.search-film {
   flex-direction: column;
   align-items: center;
   width: 200px;
+  transition: all 1s ease-out;
+
 }
 
 .item-icon:hover {
+  transform: scale(1.1);
   cursor: pointer;
 }
 
