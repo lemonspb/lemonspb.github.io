@@ -17,7 +17,7 @@ class Observable {
   };
 
 function getCount(){
-         fetch('http://alex.devel.softservice.org/testapi/').then(async response => {
+         fetch('https://alex.devel.softservice.org/testapi/').then(async response => {
           if (response.status !== 200) {
             return;
           }
