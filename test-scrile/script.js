@@ -12,8 +12,16 @@ class Observable {
   }
 }
 
+/**
+ * Fixes 0.1 + 0.2 = 0.30000000000000004 floats into 0.3.
+ */
+function fixFloat(f) {
+  return Number(f.toFixed(1));
+}
+
 const store = {
-  balance: new Observable()
+  balance: new Observable(),
+  incrementingBalanceIntervalId: undefined,
 };
 
 function getBalance() {
@@ -27,32 +35,32 @@ function getBalance() {
   });
 }
 
-function outputBalance() {
-  store.balance.onChange(balance => {
-    document.querySelector(".initial__value").innerText = `$${balance}`;
-    let countProgress = balance * 6.5666666666667 + "%";
-    let value = document.querySelector(".progress-bar__value");
-    value.style.width = countProgress;
-    const interval = setInterval(targetCount, 2000);
+const BALANCE_TARGET = 15;
+const BALANCE_INCREMENT_AMOUNT = 0.2;
+const BALANCE_INCREMENT_INTERVAL = 2000;
 
-    function targetCount() {
-      if (balance >= 15) {
-        clearInterval(interval);
-      } else {
-        balance += 0.2;
-        countProgress = balance * 6.5666666666667 ;
-        console.log(balance)
-        value.style.width = `${Math.round(countProgress)}%`;
-      }
-      if (value.style.width > 93 + "%") {
-        document.querySelector(".initial").style.display = "flex";
-      }
-      if (value.style.width == 100 + "%") {
-        document.querySelector(".target").style.background = "#00A910";
-        document.querySelector(".reach").style.visibility = "hidden";
-      }
-    }
-  });
+function renderProgress(balance) {
+  const progressBar = document.querySelector(".progress-bar__value");
+  const progress = balance / BALANCE_TARGET;
+  progressBar.style.transform = `scaleX(${progress})`;
+
+  const label = document.querySelector(".progress-bar-label");
+  label.style.display = "flex";
+  document.querySelector(".progress-bar-label__value").innerText = `$${balance}`;
+
+  document.querySelector(".reach__amount").innerText = `$${fixFloat(BALANCE_TARGET - balance)}`;
+
+  if (!store.incrementingBalanceIntervalId) {
+    store.incrementingBalanceIntervalId = setInterval(() => {
+      balance += BALANCE_INCREMENT_AMOUNT;
+      store.balance.set(fixFloat(balance));
+    }, BALANCE_INCREMENT_INTERVAL);
+  } else if (balance >= BALANCE_TARGET) {
+    clearInterval(store.incrementingBalanceIntervalId);
+    document.querySelector(".target").style.background = "#00A910";
+    document.querySelector(".reach").style.visibility = "hidden";
+    label.style.display = "none";
+  }
 }
-outputBalance();
+store.balance.onChange(renderProgress);
 getBalance();

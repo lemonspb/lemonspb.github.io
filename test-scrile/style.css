@@ -73,36 +73,30 @@ body {
   padding-bottom: 20px;
 }
 
-.label {
-  font-weight: 600;
-  color: #7c7990;
-  padding-right: 20px;
-}
-
 .progress-bar {
-  padding: 3px;
   background-color: lightgray;
+  border: 3px solid lightgray;
   width: 120px;
   height: 6px;
   display: block;
 }
 
 .progress-bar__value {
-  -webkit-animation: targetValue 2s linear;
-  animation: targetValue 2s linear;
+  position: relative;
   background-color: #4389d1;
-  -webkit-transition: 0.3s all linear;
-  -o-transition: 0.3s all linear;
-  transition: 0.3s all linear;
+  transition: 1s transform linear;
+  transform-origin: left;
+  transform: scaleX(0);
   height: 6px;
   display: block;
 }
 
-.initial {
+.progress-bar-label {
   display: none;
   position: absolute;
-  left: 71%;
-  top: 51%;
+  right: 0;
+  top: 150%;
+  transform: translateX(50%);
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
@@ -112,7 +106,12 @@ body {
   align-items: center;
 }
 
-.initial__triangle {
+
+.progress-bar-label__value {
+
+}
+
+.progress-bar-label__triangle {
   margin: 0;
   width: 0;
   height: 0;
