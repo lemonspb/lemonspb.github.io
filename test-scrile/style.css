@@ -2,6 +2,7 @@ body {
   height: 100vh;
   margin: 0;
 }
+
 .container {
   width: 100%;
   height: 100%;
@@ -9,6 +10,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .block-indicator {
   width: 350px;
   height: 150px;
@@ -20,6 +22,7 @@ body {
   border: 1px solid #888;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .header {
   box-sizing: border-box;
   font-size: 16px;
@@ -29,6 +32,7 @@ body {
   background-color: #4a4949;
   width: 100%;
 }
+
 .main {
   display: flex;
   flex-direction: column;
@@ -39,17 +43,20 @@ body {
   height: 90px;
   background: #ffffff;
 }
-.progress{
-    display: flex;
-    position: relative;
-    align-items: center;
-    padding-bottom: 20px;
+
+.progress {
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding-bottom: 20px;
 }
-.label{
-    font-weight: 600;
-    color: #7C7990;
-    padding-right: 20px;
+
+.label {
+  font-weight: 600;
+  color: #7c7990;
+  padding-right: 20px;
 }
+
 .progress-bar {
   position: relative;
   padding: 3px;
@@ -58,7 +65,9 @@ body {
   height: 6px;
   display: inline-block;
 }
+
 .progress-bar__value {
+  animation: targetValue 2s linear;
   position: absolute;
   background-color: #4389d1;
   transition: 0.3s all linear;
@@ -66,27 +75,29 @@ body {
   display: inline-block;
 }
 
-.initial{
- position: absolute;
- left: 71%;
- top: 51%;  
- display: flex;
- flex-direction: column;
- align-items: center;
+.initial {
+  position: absolute;
+  left: 71%;
+  top: 51%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 .initial__triangle {
   margin: 0;
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-bottom: 5px solid #7C7990;
+  border-bottom: 5px solid #7c7990;
 }
-.initial__value{
-    font-weight: 600;
-    color: #7C7990;
-    font-size: 14px;
-    padding-top: 4px;
+
+.initial__value {
+  font-weight: 600;
+  color: #7c7990;
+  font-size: 14px;
+  padding-top: 4px;
 }
 
 .target {
@@ -94,39 +105,52 @@ body {
   text-align: center;
   outline: none;
   border-radius: 3px;
-  background: linear-gradient(rgb(110, 112, 120), rgb(81, 81, 86))
-    rgb(110, 112, 120);
+  background: linear-gradient(rgb(110, 112, 120), rgb(81, 81, 86)) rgb(110, 112, 120);
   box-shadow: 0 1px rgba(255, 255, 255, 0.2) inset, 0 3px 5px rgba(0, 1, 6, 0.5),
     0 0 1px 1px rgba(0, 1, 6, 0.2);
   width: 50px;
   height: 40px;
 }
-.target__title{
-font-size: 15px;
-}
-.target__reach{
-    font-size: 21px;
 
+.target__title {
+  font-size: 15px;
+  border-bottom: 1px solid grey;
 }
-.reach{
-    align-items: baseline;
-    display:flex;
-    color: #A2A1A5;
-    font-size: 16px;
+
+.target__reach {
+  font-size: 21px;
 }
-.reach__icon{
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #5384A0;
-    justify-content: center;
+
+.reach {
+  align-items: baseline;
+  display: flex;
+  color: #a2a1a5;
+  font-size: 14px;
 }
+
+.reach__icon {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #5384a0;
+  justify-content: center;
+}
+
 .reach__icon i {
-    font-weight: 700;
-    font-size: 20px;
-    color: white;
+  font-weight: 700;
+  font-size: 20px;
+  color: white;
+}
+
+@keyframes targetValue {
+0%{
+  width: 0px;
+}
+100%{
+  width: 112px;
+}
 
 }
