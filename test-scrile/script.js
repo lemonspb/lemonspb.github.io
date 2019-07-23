@@ -24,43 +24,35 @@ function getCount() {
     const data = await response.json();
 
     store.balance.set(data.balance_usd);
-    
   });
-  
 }
 
 function outputCount() {
   store.balance.onChange(balance => {
-    console.log(balance)
-
     document.querySelector(".initial__value").innerText = `$${balance}`;
-    let countProgress = balance *6.666666666666667 + '%'
+    let countProgress = balance * 6.666666666666667 + "%";
     let value = document.querySelector(".progress-bar__value");
     value.style.width = countProgress;
+    const interval = setInterval(targetCount, 2000);
 
-var id = setInterval(frame, 2000);
-
-function frame() {
-  if (balance >= 15) {
-    clearInterval(id);
-  } else {
-    balance+=0.2;
-    let countProgress = balance *6.666666666666667 + '%'
-    let value = document.querySelector(".progress-bar__value");
-    value.style.width = countProgress;
-
-  }
-  if(value.style.width > 93+ '%'){
-    document.querySelector('.initial').style.display = 'flex';
+    function targetCount() {
+      if (balance >= 15) {
+        clearInterval(interval);
+      } else {
+        balance += 0.2;
+        countProgress = balance * 6.666666666666667 + "%";
+        value = document.querySelector(".progress-bar__value");
+        value.style.width = countProgress;
+      }
+      if (value.style.width > 93 + "%") {
+        document.querySelector(".initial").style.display = "flex";
+      }
+      if (value.style.width == 100 + "%") {
+        document.querySelector(".target").style.background = "#00A910";
+        document.querySelector(".reach").style.opacity = "0";
+      }
     }
-  if(value.style.width == 100 +'%'){
-    document.querySelector('.target').style.background  = '#00A910';
-    document.querySelector('.reach').style.opacity = '0';
-  }
-}
-
   });
 }
 outputCount();
 getCount();
-
