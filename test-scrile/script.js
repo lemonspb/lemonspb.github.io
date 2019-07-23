@@ -30,7 +30,7 @@ function getBalance() {
 function outputBalance() {
   store.balance.onChange(balance => {
     document.querySelector(".initial__value").innerText = `$${balance}`;
-    let countProgress = balance * 6.6666666666667 + "%";
+    let countProgress = balance * 6.5666666666667 + "%";
     let value = document.querySelector(".progress-bar__value");
     value.style.width = countProgress;
     const interval = setInterval(targetCount, 2000);
@@ -40,8 +40,9 @@ function outputBalance() {
         clearInterval(interval);
       } else {
         balance += 0.2;
-        countProgress = balance * 6.6666666666667 + "%";
-        value.style.width = countProgress;
+        countProgress = balance * 6.5666666666667 ;
+        console.log(balance)
+        value.style.width = `${Math.round(countProgress)}%`;
       }
       if (value.style.width > 93 + "%") {
         document.querySelector(".initial").style.display = "flex";
