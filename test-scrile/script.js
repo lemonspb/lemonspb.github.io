@@ -31,27 +31,30 @@ function getCount() {
 
 function outputCount() {
   store.balance.onChange(balance => {
+    console.log(balance)
+
     document.querySelector(".initial__value").innerText = `$${balance}`;
-    let width = 8;
-    let finalWidth = width/5;
-    console.log(finalWidth)
-    const countProgress = balance * width + "px";
+    let countProgress = balance *6.666666666666667 + '%'
     let value = document.querySelector(".progress-bar__value");
     value.style.width = countProgress;
-    var id = setInterval(frame, 2000);
 
-// if(value.style.width == 120 + 'px'){
-//   document.querySelector('.target').style.background  = '#00A910';
-//   document.querySelector('.reach').style.opacity = '0';
-// }
-    function frame() {
-      if (value.style.width >= 120) {
-        clearInterval(id);
-      } else {
-        finalWidth++; 
-        value.style.width = countProgress +  finalWidth + 'px';
-      }
-    }
+var id = setInterval(frame, 2000);
+
+function frame() {
+  if (balance >= 15) {
+    clearInterval(id);
+  } else {
+    balance+=0.2;
+    let countProgress = balance *6.666666666666667 + '%'
+    let value = document.querySelector(".progress-bar__value");
+    value.style.width = countProgress;
+
+  }
+  if(value.style.width == 100 +'%'){
+    document.querySelector('.target').style.background  = '#00A910';
+    document.querySelector('.reach').style.opacity = '0';
+  }
+}
 
   });
 }
