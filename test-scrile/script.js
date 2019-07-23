@@ -30,7 +30,7 @@ function getBalance() {
 function outputBalance() {
   store.balance.onChange(balance => {
     document.querySelector(".initial__value").innerText = `$${balance}`;
-    let countProgress = balance * 6.666666666666667 + "%";
+    let countProgress = balance * 6.6666666666667 + "%";
     let value = document.querySelector(".progress-bar__value");
     value.style.width = countProgress;
     const interval = setInterval(targetCount, 2000);
@@ -40,9 +40,7 @@ function outputBalance() {
         clearInterval(interval);
       } else {
         balance += 0.2;
-        console.log(balance);
-        countProgress = balance * 6.66666666666667 + "%";
-        value = document.querySelector(".progress-bar__value");
+        countProgress = balance * 6.6666666666667 + "%";
         value.style.width = countProgress;
       }
       if (value.style.width > 93 + "%") {
@@ -50,7 +48,7 @@ function outputBalance() {
       }
       if (value.style.width == 100 + "%") {
         document.querySelector(".target").style.background = "#00A910";
-        document.querySelector(".reach").style.opacity = "0";
+        document.querySelector(".reach").style.visibility = "hidden";
       }
     }
   });
