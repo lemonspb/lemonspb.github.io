@@ -16,7 +16,7 @@ const store = {
   balance: new Observable()
 };
 
-function getCount() {
+function getBalance() {
   fetch("https://alex.devel.softservice.org/testapi/").then(async response => {
     if (response.status !== 200) {
       return;
@@ -27,7 +27,7 @@ function getCount() {
   });
 }
 
-function outputCount() {
+function outputBalance() {
   store.balance.onChange(balance => {
     document.querySelector(".initial__value").innerText = `$${balance}`;
     let countProgress = balance * 6.666666666666667 + "%";
@@ -40,7 +40,8 @@ function outputCount() {
         clearInterval(interval);
       } else {
         balance += 0.2;
-        countProgress = balance * 6.666666666666667 + "%";
+        console.log(balance);
+        countProgress = balance * 6.66666666666667 + "%";
         value = document.querySelector(".progress-bar__value");
         value.style.width = countProgress;
       }
@@ -54,5 +55,5 @@ function outputCount() {
     }
   });
 }
-outputCount();
-getCount();
+outputBalance();
+getBalance();
