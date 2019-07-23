@@ -58,21 +58,19 @@ body {
 }
 
 .progress-bar {
-  position: relative;
   padding: 3px;
   background-color: lightgray;
   width: 120px;
   height: 6px;
-  display: inline-block;
+  display: block;
 }
 
 .progress-bar__value {
   animation: targetValue 2s linear;
-  position: absolute;
   background-color: #4389d1;
   transition: 0.3s all linear;
   height: 6px;
-  display: inline-block;
+  display: block;
 }
 
 .initial {
@@ -147,10 +145,10 @@ body {
 
 @keyframes targetValue {
 0%{
-  width: 0px;
+  width: 0%;
 }
 100%{
-  width: 112px;
+  width: 93%;
 }
 
 }
