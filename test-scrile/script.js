@@ -50,6 +50,9 @@ function frame() {
     value.style.width = countProgress;
 
   }
+  if(value.style.width > 93+ '%'){
+    document.querySelector('.initial').style.display = 'flex';
+    }
   if(value.style.width == 100 +'%'){
     document.querySelector('.target').style.background  = '#00A910';
     document.querySelector('.reach').style.opacity = '0';

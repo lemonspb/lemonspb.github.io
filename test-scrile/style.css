@@ -74,10 +74,10 @@ body {
 }
 
 .initial {
+  display: none;
   position: absolute;
   left: 71%;
   top: 51%;
-  display: flex;
   flex-direction: column;
   align-items: center;
 }
