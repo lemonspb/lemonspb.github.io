@@ -80,7 +80,10 @@ body {
   height: 6px;
   display: block;
 }
+.label{
+margin-right: 15px;
 
+}
 .progress-bar__value {
   position: relative;
   background-color: #4389d1;
@@ -95,7 +98,7 @@ body {
   display: none;
   position: absolute;
   right: 0;
-  top: 150%;
+  top: 170%;
   transform: translateX(50%);
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -108,7 +111,10 @@ body {
 
 
 .progress-bar-label__value {
-
+padding-top: 10px;
+font-weight: 600;
+color: #7c7990;
+font-size: 14px;
 }
 
 .progress-bar-label__triangle {
@@ -118,13 +124,6 @@ body {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-bottom: 5px solid #7c7990;
-}
-
-.initial__value {
-  font-weight: 600;
-  color: #7c7990;
-  font-size: 14px;
-  padding-top: 4px;
 }
 
 .target {
