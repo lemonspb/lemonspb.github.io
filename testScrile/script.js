@@ -51,12 +51,16 @@ function renderProgress(balance) {
   document.querySelector(".reach__amount").innerText = `$${fixFloat(BALANCE_TARGET - balance)}`;
 
   if (!store.incrementingBalanceIntervalId) {
+    console.log(!store.incrementingBalanceIntervalId)
     store.incrementingBalanceIntervalId = setInterval(() => {
       balance += BALANCE_INCREMENT_AMOUNT;
       store.balance.set(fixFloat(balance));
     }, BALANCE_INCREMENT_INTERVAL);
   } else if (balance >= BALANCE_TARGET) {
+
     clearInterval(store.incrementingBalanceIntervalId);
+    console.log(store.incrementingBalanceIntervalId)
+
     document.querySelector(".target").style.background = "#00A910";
     document.querySelector(".reach").style.visibility = "hidden";
     label.style.display = "none";
