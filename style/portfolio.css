@@ -1,140 +1,194 @@
-body{
-    margin: 0;
-    color:white;
-}
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.page-nav{
-    color: white;
-   position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 99;
-}
-.page-nav__list{
-width: 100%;
-display: flex;
-align-items: flex-end;
-justify-content: flex-end;
-
-}
-.page-nav__item{
-    padding: 20px 30px;
-    list-style-type: none;
-}
-.page-nav__link{
-    font-size: 30px;
-    text-transform: uppercase;
-    color: white;
-    text-decoration: none;
-    }
-.page-header{
-    width: 100%;
-    z-index: 1;
-    position: fixed;
-    top: 0px;
-    height: 100vh;
-    background-color: black;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-.page-header__title h1{
-    font-size: 30px;
-    font-family: 'RalewayBold',sans-serif;
-    text-align: center;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 30px;
-}
-.page-header__title p{
-    font-size: 20px;
-    text-align: center;
-    color: #f2f2f2;
-    letter-spacing: 5px;
+html {
+  scroll-behavior: smooth;
 }
 
-.page-main{
-    width: 100%;
-    background-color: #ffffff;
-    overflow: hidden;
-    position: relative;
-    z-index: 10;
-    height: auto;
-    margin-top: 100vh;
+body {
+  margin: 0;
 }
 
-
-.portfolio{
-    position: relative;
-
-    display: flex;
-align-items: center;
-flex-direction: column;
-animation-name: animateLoadPage;
-animation-duration: 2s;
-
-}
-.portfolio_title{
-font-size: 50px;
-padding-bottom: 40px;
-color: white;       
-}
-.portfolio-item__title{
-    cursor: pointer;
-    color: white;
-    font-size: 30px;
-    padding-bottom: 20px;
-}
-.portfolio-item__link{
-    display: inline-block;
- width: 500px;
-height: 500px;
-background:black;
-color: white;
-font-size: 30px;
-}
-.portfolio-item__overlay{
-    transition: 0.9s  all ease;
-position: absolute;
-width: 500px;
-height: 500px;   
-background: black;
-opacity: 0; 
-}
- .portfolio-item__link:hover .portfolio-item__overlay{
-    opacity: 0.9;
-
-   
-}
-.movedb-img{
- background-image:url('/image/film-db-screen.png');
-background-size: cover;
-background-position: center;
+* {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-.lastfm-img{
-    background-image:url('/image/last-fm-screen.png');
-    background-size: cover;
-    background-position: center;
+.section-padding {
+  padding: 100px 0;
+}
+.scills-color{
+    color: #409FBF;
 }
 
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.page-nav {
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+}
+
+.page-nav__list {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.page-nav__item {
+  padding: 30px 30px;
+  list-style-type: none;
+}
+
+.page-nav__link {
+  font-size: 20px;
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+}
+
+.page-header {
+  width: 100%;
+  z-index: 1;
+  position: fixed;
+  top: 0px;
+  height: 100vh;
+  background-color: black;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-header__center{
+    padding-top: 150px;
+}
+.page-header__title {
+  padding-bottom: 40px;
+  font-size: 30px;
+  font-family: "RalewayBold", sans-serif;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 30px;
+}
+
+.page-header__subtitle {
+  font-size: 20px;
+  text-align: center;
+  color: #f2f2f2;
+  letter-spacing: 5px;
+}
+
+.arrow-bottom {
+  animation-timing-function: ease-in-out;
+  animation-name: arrowDown;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  text-align: center;
+  color: white;
+  font-size: 60px;
+}
+
+.page-main {
+  width: 100%;
+  background-color: #ffffff;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+  height: auto;
+  margin-top: 100vh;
+}
+
+.about-me__title {
+  font-size: 25px;
+  margin-top: -30px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.about-me__text {
+    font-size: 16px;
+  column-count: 2;
+}
+
+.portfolio {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  animation-name: animateLoadPage;
+  animation-duration: 2s;
+}
+
+.portfolio_title {
+  font-size: 50px;
+  padding-bottom: 40px;
+  color: black;
+}
+
+.portfolio-item__title {
+  cursor: pointer;
+  color: white;
+  font-size: 30px;
+  padding-bottom: 20px;
+}
+
+.portfolio-item__link {
+  display: inline-block;
+  width: 500px;
+  height: 500px;
+  background: black;
+  color: white;
+  font-size: 30px;
+}
+
+.portfolio-item__overlay {
+  transition: 0.9s all ease;
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: black;
+  opacity: 0;
+}
+
+.portfolio-item__link:hover .portfolio-item__overlay {
+  opacity: 0.9;
+}
+
+.movedb-img {
+  background-image: url("/image/film-db-screen.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.lastfm-img {
+  background-image: url("/image/last-fm-screen.png");
+  background-size: cover;
+  background-position: center;
+}
 
 @keyframes animateLoadPage {
-    from {
-      left: -500px;  
-      opacity: 0;
-    }
-  
-    to {
-        left: 0px;  
+  from {
+    left: -500px;
+    opacity: 0;
+  }
 
-      opacity: 1;
-    }
+  to {
+    left: 0px;
+
+    opacity: 1;
+  }
+}
+
+@keyframes arrowDown {
+  100% {
+    transform: translateY(-10px);
+  }
+}
