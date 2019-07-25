@@ -11,47 +11,72 @@
 
 <body>
     <nav class='page-nav'>
-        <ul class='page-nav__list'>
-            <li class='page-nav__item'><a href="#" class='page-nav__link'>home</a></li>
-            <li class='page-nav__item'><a href="#" class='page-nav__link'>about me</a></li>
-            <li class='page-nav__item'><a href="#" class='page-nav__link'>portfolio</a></li>
-        </ul>
+        <div class='container'>
+            <ul class='page-nav__list'>
+                <li class='page-nav__item'><a href="#" class='page-nav__link'>home</a></li>
+                <li class='page-nav__item'><a href="#about-id" class='page-nav__link'>about me</a></li>
+                <li class='page-nav__item'><a href="#portfolio-id" class='page-nav__link'>portfolio</a></li>
+            </ul>
+        </div>
+
     </nav>
     <header class='page-header'>
-        <div class='page-header__title'>
-            <h1>Misha Skopenko</h1>
-            <p>Junior Front-End Developer</p>
+        <div class='page-header__center'>
+            <div class='page-header__title'>Misha Skopenko</div>
+            <p class='page-header__subtitle'>Junior Front-End Developer</p>
+            <a href="#about-id">
+                    <div class='arrow-bottom' >&#129083;</div>
+            </a>
+            
         </div>
     </header>
     <main class='page-main'>
-        <section class='about-me'></section>
-        <section class='portfolio'>
-              <div class="portfolio">
-                <div class='portfolio_title'>Portfolio pages</div>   
-<div class='portfolio-item'>   
-        <div class='portfolio-item__title'> API the movie db</div>
+        <section class='about-me section-padding' id='about-id'>
+            <div class='container'>
+                <div class="about-me__title">
+                    About me
+                </div>
+                <div class="about-me__text">
+              
+                        Привет, меня зовут Миша Скопенко, и я младший фронтенд-разработчик. 
 
-     <a href="https://lemonspb.github.io/film%20api/film.html" class='portfolio-item__link movedb-img' target='_blank'>
-        <div class="portfolio-item__overlay">
-                API the movie db  with localstorage on vanilla js
-            
-    </div>
-    </a>
-    
-</div>
-<div class='portfolio-item'>    
-        <div class='portfolio-item__title'>API Last-fm </div>
-
-    <a href="https://lemonspb.github.io/last-fm%20api/index.html" class='portfolio-item__link  lastfm-img'>
-        <div class="portfolio-item__overlay"> 
-                API Last-fm on vanilla js
-        </div></a>
- 
-    </div>
+                        
+                        Моя основная профессиональная цель - найти работу, которая даст мне возможность углубить и улучшить ранее приобретенные навыки программирования, участвовать в интересных и творческих проектах и ​​повышать мою квалификацию в области разработки Front-End. В основном я хочу сосредоточиться на изучении JavaScript. 
+                        
+                        Я работаю с такими технологиями, как <span class='scills-color'> HTML, CSS, JavaScript, jQuery, Sсss, Rest API, Gulp, Webpack, Git, Vue, Photoshop.</span>
+                        
+                   в свободное время я занимаюсь бегом и фотографией.
+                        
+                        
+                </div>
+            </div>
         </section>
+        <section class='portfolio' id='portfolio-id'>
+            <div class='portfolio_title'>Portfolio pages</div>
+            <div class='portfolio-item'>
+                <div class='portfolio-item__title'> API the movie db</div>
 
+                <a href="https://lemonspb.github.io/film%20api/film.html" class='portfolio-item__link movedb-img'
+                    target='_blank'>
+                    <div class="portfolio-item__overlay">
+                        API the movie db with localstorage on vanilla js
+
+                    </div>
+                </a>
+
+            </div>
+            <div class='portfolio-item'>
+                <div class='portfolio-item__title'>API Last-fm </div>
+
+                <a href="https://lemonspb.github.io/last-fm%20api/index.html" class='portfolio-item__link  lastfm-img'>
+                    <div class="portfolio-item__overlay">
+                        API Last-fm on vanilla js
+                    </div>
+                </a>
+
+        </section>
+        <footer class='page-footer'>dsfsdfds</footer>
     </main>
-    <footer></footer>
 
 
 
@@ -61,7 +86,8 @@
 
 
 
-  
+
+
     <script src="./js/script.js"></script>
 </body>
 
