@@ -173,7 +173,13 @@ body {
   background-size: cover;
   background-position: center;
 }
+.page-footer{
+    text-align: center;
+    color: rgb(51, 51, 51);
+background: black;
+padding: 20px 5px;
 
+}
 @keyframes animateLoadPage {
   from {
     left: -500px;
