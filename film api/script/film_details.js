@@ -70,7 +70,7 @@ store.more.onChange(film => {
   blockAddBest.classList.add("info-inner__add");
   const buttonAddBestFilm = document.createElement("button");
   buttonAddBestFilm.classList.add("add-best-film");
-  buttonAddBestFilm.innerText = "в избранное";
+  buttonAddBestFilm.innerText = "Добавить в израбанное";
   blockAddBest.appendChild(buttonAddBestFilm);
   
   /////// create info film

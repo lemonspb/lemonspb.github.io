@@ -11,14 +11,16 @@ function scrollNavBlock() {
       : document.querySelector(".page-nav").classList.remove("scroll-nav");
   });
 }
-function NavMobile(){
-    document.querySelector('.burger-menu').addEventListener('click', ()=>{
-const  navLost = document.querySelector('.page-nav__list')
-navLost.classList.toggle('flex');
-
-
+function NavMobile() {
+  document.querySelector(".burger-menu").addEventListener("click", () => {
+    document.querySelector(".page-nav__list").classList.toggle("flex");
+  });
+  document.querySelectorAll(".page-nav__item").forEach(item => {
+    item.addEventListener("click", () => {
+      document.querySelector(".page-nav__list").classList.remove("flex");
     });
-
+  });
 }
-NavMobile()
+NavMobile();
 scrollNavBlock();
+AOS.init();

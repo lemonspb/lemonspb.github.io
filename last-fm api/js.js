@@ -127,8 +127,7 @@ const placeholders = [
 const searchInput = document.querySelector(".searchInput");
 searchInput.placeholder = `Например ${getRandomItem(placeholders)}`;
 
-// searchInput.addEventListener('keypress', () => searchInput.value.substr(0, 1).toUpperCase() + searchInput.value.substr(1)
-//  );
+
 
 document.querySelector(".searchButton").addEventListener("click", () => {
   scrollDown();
@@ -198,6 +197,7 @@ function OutArtistInfo() {
           const data = await response.json();
           store.tagsText.set(e.target.innerText.slice(1));
           store.tagsArtist.set(data.topartists.artist);
+
         });
       });
     });
@@ -206,9 +206,11 @@ function OutArtistInfo() {
     const TagArtist = document.createElement("div");
     TagArtist.classList.add("artists-by-tags");
     const tagsA = document.querySelector(".tags-artist");
-  
+    while (similarBlock.firstChild) {
+      similarBlock.removeChild(similarBlock.firstChild);
+    }
     topArtist.forEach(top => {
-      
+
       const topArtistName = document.createElement("span");
       topArtistName.innerText = top.name;
       TagArtist.appendChild(topArtistName);
@@ -219,13 +221,12 @@ function OutArtistInfo() {
       });
       tagsA.parentNode.insertBefore(TagArtist, tagsA.nextSibling);
     });
-
   });
   store.albumsData.onChange(albums => {
     const albumNodes = document.querySelectorAll(".item-album");
     while (albumNodes.firstChild) {
       albumNodes.removeChild(albumNodes.firstChild);
-  }
+    }
     albums.forEach((album, i) => {
       const tracksNode = document.createElement("ol");
       tracksNode.classList.add("list-track");
@@ -235,7 +236,7 @@ function OutArtistInfo() {
         li.innerText = track.name;
         tracksNode.appendChild(li);
       });
-console.log(tracksNode)
+      console.log(tracksNode);
       const albumNode = albumNodes[i];
       // const still = document.createElement('span')
       // still.classList.add('still');
@@ -247,25 +248,28 @@ console.log(tracksNode)
       //   still.style.display = 'none';
       // })
       albumNode.appendChild(tracksNode);
-//       if(tracksNode.childNodes.length > 12){
-//         tracksNode.style.overflow = 'hidden'
-// document.querySelectorAll('.item-album').forEach((x)=>{
-// x.appendChild(still)
+      //       if(tracksNode.childNodes.length > 12){
+      //         tracksNode.style.overflow = 'hidden'
+      // document.querySelectorAll('.item-album').forEach((x)=>{
+      // x.appendChild(still)
 
-// })
-//       }
+      // })
+      //       }
     });
   });
   store.similar.onChange(similar => {
     const similarBlock = document.querySelector(".similar");
-    similarBlock.childNodes.forEach(child => {
-      child.remove();
-    });
+    // similarBlock.childNodes.forEach(child => {
+    //   child.remove();
+    // });
+    while (similarBlock.firstChild) {
+      similarBlock.removeChild(similarBlock.firstChild);
+    }
     similar.forEach(name => {
       const span = document.createElement("span");
       span.classList.add("similar-artist");
       span.innerText = name.name;
-     
+
       span.addEventListener("click", () => {
         searchInput.value = span.innerText;
         fetchArtist(searchInput.value);
@@ -276,28 +280,30 @@ console.log(tracksNode)
     });
   });
   store.bio.onChange(bio => {
-    const bioBlock = document.querySelector(".bio"); 
+    const bioBlock = document.querySelector(".bio");
     while (bioBlock.firstChild) {
       bioBlock.removeChild(bioBlock.firstChild);
-  }
-    const biography = document.createElement('div');
+    }
+    const biography = document.createElement("div");
     biography.innerHTML = bio.content || "We know nothing about this artist.";
-    biography.classList.add('biography') 
-    const still = document.createElement('span')
-    still.classList.add('still')
-    still.innerText = 'показать полностью'
-    still.addEventListener('click', ()=>{
-      biography.style.height = 'auto';
-      still.style.display = 'none';
-    })
-    bioBlock.appendChild(biography)
+    biography.classList.add("biography");
+    const still = document.createElement("span");
+    still.classList.add("still");
+    still.innerText = "показать полностью";
+    still.addEventListener("click", () => {
+      biography.style.height = "auto";
+      still.style.display = "none";
+    });
+    bioBlock.appendChild(biography);
     bioBlock.appendChild(still);
 
-  
- if(biography.innerText.length > 300){
-biography.style.height = 300 + 'px'
- }
+    if (biography.innerText.length > 300) {
+      biography.style.height = 300 + "px";
+    }
+    else{
+      still.style.display = "none";
  
+    }
   });
 }
 
