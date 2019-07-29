@@ -79,10 +79,11 @@ button:hover {
 }
 
 .your-best {
+  
   top: 5%;
   right: 5%;
   position: absolute;
-  color: red;
+  color:tomato;
   z-index: 1;
   cursor: pointer;
 }

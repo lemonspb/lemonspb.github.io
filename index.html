@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./style/portfolio.css">
-    <title>Document</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="shortcut icon" href="./image/favicon (1).ico" type="image/x-icon">
+    <title>Portfolio | Skopenko Mikhail - Junior Front-End Developer</title>
 </head>
 
 <body>
+ <div class='container'>
     <nav class='page-nav'>
-        <div class='container'>
             <div class='burger-menu'>
-                    <span class ='burger-menu__line'></span>
                     <span class ='burger-menu__line'></span>
                     <span class ='burger-menu__line'></span>
                     <span class ='burger-menu__line'></span>
@@ -25,9 +26,10 @@
                 <li class='page-nav__item'><a href="#about-id" class='page-nav__link'>about me</a></li>
                 <li class='page-nav__item'><a href="#portfolio-id" class='page-nav__link'>portfolio</a></li>
             </ul>
-        </div>
 
     </nav>
+</div>
+
     <header class='page-header'>
         <div class='page-header__center'>
             <div class='page-header__title'>Misha Skopenko</div>
@@ -41,10 +43,16 @@
     <main class='page-main'>
         <section class='about-me section-padding' id='about-id'>
             <div class='container'>
-                <div class="about-me__title">
+                <div class="about-me__title"
+                data-aos="fade-right"
+     data-aos-offset="100"
+     data-aos-easing="ease-in-sine"
+                >
                     About me
                 </div>
-                <div class="about-me__text">
+                <div class="about-me__text"
+                data-aos="fade-up"
+     data-aos-duration="3000">
               
                         Привет, меня зовут Миша Скопенко, и я младший фронтенд-разработчик. 
 
@@ -60,30 +68,50 @@
             </div>
         </section>
         <section class='portfolio' id='portfolio-id'>
-            <div class='portfolio_title'>Portfolio pages</div>
+                <div class='portfolio__title'>Portfolio</div>
+            <div class="container  flex f-row">
             <div class='portfolio-item'>
-                <div class='portfolio-item__title'> API the movie db</div>
 
-                <a href="https://lemonspb.github.io/film%20api/film.html" class='portfolio-item__link movedb-img'
+                <div  class='portfolio-item__link movedb-img'
                     target='_blank'>
-                    <div class="portfolio-item__overlay">
-                        API the movie db with localstorage on vanilla js
+                    <div class="portfolio-item__overlay overlay-item">
 
+                       <div  class='overlay-item__title'>
+                        API  the movie data base 
+                         </div>
+                         <div  class='overlay-item__description'>
+                                HTML, CSS , JavaScript, REST API, localStorage
+                         </div>
+                       <div class='overlay-item__buttons'> 
+                       <a href="https://lemonspb.github.io/film%20api/film.html" target="_blank">посмотреть</a>
+<a href='https://github.com/lemonspb/lemonspb.github.io/tree/master/film%20api' target="_blank">код</a>
+</div>
                     </div>
                 </a>
 
             </div>
-            <div class='portfolio-item'>
-                <div class='portfolio-item__title'>API Last-fm </div>
+        </div>
+            <div class='portfolio-item '>
 
-                <a href="https://lemonspb.github.io/last-fm%20api/index.html" class='portfolio-item__link  lastfm-img'>
-                    <div class="portfolio-item__overlay">
-                        API Last-fm on vanilla js
+                <div  class='portfolio-item__link  lastfm-img'>
+                    <div class="portfolio-item__overlay overlay-item">
+                            <div  class='overlay-item__title'>
+
+                        API - Last-fm 
+                        </div>
+                        <div  class='overlay-item__description'>
+                        HTML, CSS , JavaScript, REST API
+                            </div>
+                        <div class='overlay-item__buttons'> 
+                        <a href="https://lemonspb.github.io/last-fm%20api/index.html" target="_blank">посмотреть</a>
+                        <a href="https://github.com/lemonspb/lemonspb.github.io/tree/master/last-fm%20api" target="_blank">код</a>
+
                     </div>
                 </a>
-
+            </div>
         </section>
         <footer class='page-footer'>
+            
             <div class="text-copyright">
                 Copyright &#169; Portfolio | Misha Skopenko, 2019
             </div>
@@ -99,6 +127,7 @@
 
 
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script src="./js/script.js"></script>
 </body>
