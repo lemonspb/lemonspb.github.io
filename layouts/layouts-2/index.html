@@ -724,15 +724,15 @@
             <div class="contact__block">
                 <form action="mail.php" method="post" class='contact-form'>
                  <div class="form__line">
-                     <input type="text" placeholder="YOUR NAME"   name="name" >
-                     <input type="text" name="email" placeholder="Your E-mail" class='d'>
+                     <input type="text" placeholder="YOUR NAME"   name="name" required >
+                     <input type="text" name="email" placeholder="Your E-mail" required>
                  </div>
                  <div class="form__line">
                         <input type="text" name="subject" placeholder="Your subject" class='d'>
                         <input type="text" name="company" placeholder="Company name">
                     </div>
                     <textarea cols="30" rows="10"name='message' placeholder="Write your message"></textarea>
-                    <input   type="submit" value="send message"class="btn btn--submit"></input>
+                    <button   type="submit" class="btn btn--submit">send message</button>
                 </form>
             </div>
         </div> 
