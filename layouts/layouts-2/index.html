@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <link
-        href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,700|Roboto+Slab:400,700&display=swap"
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+    <link  href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,700|Roboto+Slab:400,700&display=swap"
         rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
@@ -77,7 +78,7 @@
                     Startup
                 </div>
                 <!-- nav -->
-                <div class="nav">
+                <nav class="nav">
                     <a href="#" class="nav__link">Home</a>
                     <a href="#" class="nav__link">Services</a>
                     <a href="#" class="nav__link">About </a>
@@ -85,7 +86,7 @@
                     <a href="#" class="nav__link">Blog</a>
                     <a href="#" class="nav__link">Clients</a>
                     <a href="#" class="nav__link">Contact</a>
-                </div>
+                </nav>
 <div class="burger__menu">
     <div class="burger__line"></div>
     <div class="burger__line"></div>
@@ -194,6 +195,7 @@
                 <!--team-->
 
                 <div class="about-us__team team">
+
                     <div class="team__item">
                         <div class='team__image'>
                             <img src="./img/team/Layer_12.png" alt="">
@@ -256,6 +258,37 @@
                         <div class="team__name">Rubel Miah</div>
                         <div class="team__prof">Lead WordPress Developer</div>
                     </div>
+                    <div class="team__item">
+                            <div class='team__image'>
+                                <img src="./img/team/Layer_12.png" alt="">
+                                <div class="team__overlay">
+                                    <div class="social">
+                                        <a href="#" class="social__item">
+                                            <svg class='social__icon'>
+                                                <use xlink:href='#facebook'>
+                                            </svg>
+                                        </a>
+                                        <a href="#" class="social__item">
+                                            <svg class='social__icon'>
+                                                <use xlink:href='#twitter'>
+                                            </svg>
+                                        </a>
+                                        <a href="#" class="social__item">
+                                            <svg class='social__icon'>
+                                                <use xlink:href='#google-plus'>
+                                            </svg>
+                                        </a>
+                                        <a href="#" class="social__item">
+                                            <svg class='social__icon'>
+                                                <use xlink:href='#in'>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="team__name">Md. Khalil Uddin</div>
+                            <div class="team__prof">Head of Ideas</div>
+                        </div>
                     <div class="team__item">
                         <div class='team__image'>
                             <img src="./img/team/team-3.png" alt="">
@@ -335,7 +368,7 @@
                     <span class='title-block__line'></span>
                 </div>
                 <div class="title-block__subtitle nav-title">
-                    <a href="#" class='nav-title__item'>All </a>
+                    <a href="#" class='nav-title__item active'>All </a>
                     <a href="#" class='nav-title__item'> Branding </a>
                     <a href="#" class='nav-title__item'>Design</a>
                     <a href="#" class='nav-title__item'>Development</a>
@@ -563,7 +596,13 @@
                             eirmod teduntlabore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
                             justo duo dolores et erebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
                             dolor sit am Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                            tempor invidulabore et dolore aliquyam erat, sed diam </div>
+                            tempor invidulabore et dolore aliquyam erat, sed diam
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                            eirmod teduntlabore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                            justo duo dolores et erebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+                            dolor sit am Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                            tempor invidulabore et dolore aliquyam erat, sed diam 
+                        </div>
                         <div class="blog__readmore">
                             Read more
                         </div>
@@ -579,15 +618,34 @@
     <div class="container">
         <div class="clients__inner">
             <div class="clients__item">
-                    <div class="clients__barands"> 
-                        <img src="./img/brands/brands-1.png" alt="">
-                        <img src="./img/brands/brands-2.png" alt="">
-                        <img src="./img/brands/brands-3.png" alt="">
-                        <img src="./img/brands/brands-4.png" alt="">
-                        <img src="./img/brands/brands-5.png" alt="">
+                    <div class="clients__barands brands"> 
+                        <img src="./img/brands/brands-1.png" class='brands__img' alt="">
+                        <img src="./img/brands/brands-2.png" class='brands__img' alt="">
+                        <img src="./img/brands/brands-3.png"class='brands__img' alt="">
+                        <img src="./img/brands/brands-4.png"class='brands__img' alt="">
+                        <img src="./img/brands/brands-5.png" class='brands__img' alt="">
                        
                     </div>
                     <blockquote class='clients__blockquote'>
+                            Hvaing placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum”
+
+                    </blockquote>
+                    <div class="clients__name">
+
+                            John Doe, Google Inc.
+                    </div>
+            </div>
+            <div class="clients__item">
+                    <div class="clients__barands brands"> 
+                        <img src="./img/brands/brands-1.png" class='brands__img' alt="">
+                        <img src="./img/brands/brands-2.png" class='brands__img' alt="">
+                        <img src="./img/brands/brands-3.png"class='brands__img' alt="">
+                        <img src="./img/brands/brands-4.png"class='brands__img' alt="">
+                        <img src="./img/brands/brands-5.png" class='brands__img' alt="">
+                       
+                    </div>
+                    <blockquote class='clients__blockquote'>
+                            Hvaing placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum”
                             Hvaing placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum”
 
                     </blockquote>
@@ -664,17 +722,17 @@
         </div>
             </div>
             <div class="contact__block">
-                <form action="" class='contact-form'>
+                <form action="mail.php" method="post" class='contact-form'>
                  <div class="form__line">
-                     <input type="text" placeholder="YOUR NAME" class='d' >
-                     <input type="text" placeholder="Your subject" class='d'>
+                     <input type="text" placeholder="YOUR NAME"   name="name" >
+                     <input type="text" name="email" placeholder="Your E-mail" class='d'>
                  </div>
                  <div class="form__line">
-                        <input type="text" placeholder="YOUR NAME" class='d'>
-                        <input type="text" placeholder="Company name" class='d'>
+                        <input type="text" name="subject" placeholder="Your subject" class='d'>
+                        <input type="text" name="company" placeholder="Company name">
                     </div>
-                    <textarea cols="30" rows="10" placeholder="Write your message"></textarea>
-                    <button class="btn btn--submit">send message</button>
+                    <textarea cols="30" rows="10"name='message' placeholder="Write your message"></textarea>
+                    <input   type="submit" value="send message"class="btn btn--submit"></input>
                 </form>
             </div>
         </div> 
@@ -717,6 +775,11 @@
    </div>
 </div>
 </footer>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script  src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="script.js"></script>
 </body>
 
