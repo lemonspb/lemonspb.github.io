@@ -1,11 +1,11 @@
 <?php
-$name = $_POST['fio'];
+$name = $_POST['name'];
 $email = $_POST['email'];
-$name = htmlspecialchars($fio);
+$name = htmlspecialchars($name);
 $email = htmlspecialchars($email);
-$name = urldecode($fio);
+$name = urldecode($name);
 $email = urldecode($email);
-$name = trim($fio);
+$name = trim($name);
 $email = trim($email);
 echo $name;
 //echo "<br>";
