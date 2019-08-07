@@ -48,7 +48,6 @@ $(document).ready(function() {
     window.addEventListener("scroll", () => {
       if (document.documentElement.scrollTop > 0) {
         document.querySelector(".header").classList.add("fixed");
-        
       } else {
         document.querySelector(".header").classList.remove("fixed");
       }
@@ -56,16 +55,12 @@ $(document).ready(function() {
   }
 
   document.querySelector(".burger__menu").addEventListener("click", () => {
-      if(document.querySelector(".nav").classList.contains('toogle'))
-      {
-        document.querySelector('.header').style.backgroundColor = 'transparent';
-
-      }
-
-      else{
-        document.querySelector('.header').style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-
-      }
+    if (document.querySelector(".nav").classList.contains("toogle")) {
+      document.querySelector(".header").style.backgroundColor = "transparent";
+    } else {
+      document.querySelector(".header").style.backgroundColor =
+        "rgba(0, 0, 0, 0.7)";
+    }
     document.querySelector(".nav").classList.toggle("toogle");
   });
 
@@ -108,25 +103,74 @@ $(document).ready(function() {
       });
     });
   }
-  function zoomImg(){
-      document.querySelectorAll('.works__image').forEach((img)=>{
-          
-          img.querySelector('.btn').addEventListener('click', ()=>{
-              document.querySelector('.modal-content__img').setAttribute('src', `${img.querySelector('img').src}`)
-              document.querySelector('.modal-img').style.display = 'block';
-              document.body.style.overflow = "hidden";
-
-          });
-
-      })
-      document.querySelector(".close__img").addEventListener("click", () => {
-    document.querySelector('.modal-img').style.display = "none";
-        document.body.style.overflow = "auto";
+  function zoomImg() {
+    document.querySelectorAll(".works__image").forEach(img => {
+      img.querySelector(".btn").addEventListener("click", () => {
+        document
+          .querySelector(".modal-content__img")
+          .setAttribute("src", `${img.querySelector("img").src}`);
+        document.querySelector(".modal-img").style.display = "block";
+        document.body.style.overflow = "hidden";
       });
+    });
+    document.querySelector(".close__img").addEventListener("click", () => {
+      document.querySelector(".modal-img").style.display = "none";
+      document.body.style.overflow = "auto";
+    });
+  }
+
+  function WorksTab(e){
+    document.querySelectorAll('.nav-title__item').forEach((item)=>{
+
+      item.addEventListener('click', (e)=>{
+console.log(e.target.innerText)
+if(e.target.innerText === 'Branding'){
+document.querySelectorAll('.works__item').forEach((works)=>{
+  works.style.display = 'none'
+if(works.classList.contains('branding')){
+  works.style.display = 'block';
+}
+});
+}
+if(e.target.innerText === 'All'){
+  document.querySelectorAll('.works__item').forEach((works)=>{
+    works.style.display = 'none'
+  if(works.classList.contains('works__item')){
+    works.style.display = 'block';
+  }
+  });
+}
+if(e.target.innerText === 'Design'){
+  document.querySelectorAll('.works__item').forEach((works)=>{
+    works.style.display = 'none'
+  if(works.classList.contains('design')){
+    works.style.display = 'block';
+  }
+  });
+}
+if(e.target.innerText === 'Development'){
+  document.querySelectorAll('.works__item').forEach((works)=>{
+    works.style.display = 'none'
+  if(works.classList.contains('development')){
+    works.style.display = 'block';
+  }
+  });
+}
+if(e.target.innerText === 'Strategy'){
+  document.querySelectorAll('.works__item').forEach((works)=>{
+    works.style.display = 'none'
+  if(works.classList.contains('strategy')){
+    works.style.display = 'block';
+  }
+  });
+}
+      });
+    });
   }
 
   Modal();
   readMore();
   headerFixed();
   zoomImg();
+  WorksTab();
 });
