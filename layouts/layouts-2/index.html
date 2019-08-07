@@ -8,6 +8,7 @@
     <link  href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,700|Roboto+Slab:400,700&display=swap"
         rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="modal.css">
     <link rel="stylesheet" href="./style.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Layout</title>
@@ -105,7 +106,7 @@
                 <div class="intro__subtitle">
                     Your Favourite Creative Agency Template
                 </div>
-                <a href="" class="btn ">Get Started</a>
+                <button class="btn open-modal ">Get Started</button>
             </div>
         </div> <!-- /container -->
     </div>
@@ -387,9 +388,9 @@
                             <div class="works__subtitle">
                                 Branding
                             </div>
-                            <a href='' class="btn btn--white">
+                            <button  class="btn btn--white">
                                 View <i class="arrow right"></i>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -403,9 +404,9 @@
                             <div class="works__subtitle">
                                 Branding
                             </div>
-                            <a href='' class="btn btn--white">
+                            <button  class="btn btn--white">
                                 View <i class="arrow right"></i>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -419,9 +420,9 @@
                             <div class="works__subtitle">
                                 Branding
                             </div>
-                            <a href='' class="btn btn--white">
+                            <button  class="btn btn--white">
                                 View <i class="arrow right"></i>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -435,9 +436,9 @@
                             <div class="works__subtitle">
                                 Branding
                             </div>
-                            <a href='' class="btn btn--white">
+                            <button class="btn btn--white">
                                 View <i class="arrow right"></i>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -451,9 +452,9 @@
                             <div class="works__subtitle">
                                 Branding
                             </div>
-                            <a href='' class="btn btn--white">
+                            <button class="btn btn--white">
                                 View <i class="arrow right"></i>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -467,9 +468,9 @@
                             <div class="works__subtitle">
                                 Branding
                             </div>
-                            <a href='' class="btn btn--white">
+                            <button class="btn btn--white">
                                 View <i class="arrow right"></i>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -483,9 +484,9 @@
                             <div class="works__subtitle">
                                 Branding
                             </div>
-                            <a href='' class="btn btn--white">
+                            <button class="btn btn--white">
                                 View <i class="arrow right"></i>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -499,9 +500,9 @@
                             <div class="works__subtitle">
                                 Branding
                             </div>
-                            <a href='' class="btn btn--white">
+                            <button class="btn btn--white">
                                 View <i class="arrow right"></i>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -515,9 +516,9 @@
                             <div class="works__subtitle">
                                 Branding
                             </div>
-                            <a href='' class="btn btn--white">
+                            <button class="btn btn--white">
                                 View <i class="arrow right"></i>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -537,7 +538,7 @@
                     <p>Do you like OUR WORK so far?</p>
                     <p>Let's talk about YOUR PROJECT!</p>
                 </div>
-                <a href="" class="btn">Get in Touch</a>
+                <button  class="btn open-modal">Get in Touch</button>
             </div>
         </div>
         <!--/container-->
@@ -676,7 +677,7 @@
     <div class="adress__icon">
 
     </div>
-<div class="adress__title">
+<div class="adress__title icon__adress">
         Address
 </div>
 <div class="address__subtitle">
@@ -687,10 +688,8 @@
 </div>
 </div>
 <div class="adress__item">
-        <div class="adress__icon">
-    
-        </div>
-    <div class="adress__title">
+       
+    <div class="adress__title icon__phone">
             Hotline (24x7)
     </div>
     <div class="address__subtitle">
@@ -704,10 +703,8 @@
     </div>
     </div>
     <div class="adress__item">
-            <div class="adress__icon">
-        
-            </div>
-        <div class="adress__title">
+         
+        <div class="adress__title icon__mall">
                 E-mail
         </div>
         <div class="address__subtitle">
@@ -722,7 +719,7 @@
         </div>
             </div>
             <div class="contact__block">
-                <form action="mail.php" method="post" class='contact-form'>
+                <form action="./send.php" method="post" class='contact-form'>
                  <div class="form__line">
                      <input type="text" placeholder="YOUR NAME"   name="name" required >
                      <input type="text" name="email" placeholder="Your E-mail" required>
@@ -774,7 +771,31 @@
             </div>
    </div>
 </div>
-</footer>
+</footer>  <!--/footer  --> 
+
+<!-- The Modal -->
+<div class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Modal Header</h2>
+          </div>
+          <div class="modal-body">
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </div>
+          <div class="modal-footer">
+            <h3>Modal Footer</h3>
+          </div>
+        </div>
+      
+      </div>
+<!-- The ModalImg -->
+<div  class="modal-img">
+        <span class="close__img">&times;</span>
+        <img class="modal-content__img">
+      </div>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
