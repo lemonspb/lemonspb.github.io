@@ -119,11 +119,10 @@ $(document).ready(function() {
     });
   }
 
-  function WorksTab(e){
+  function WorksTab(){
     document.querySelectorAll('.nav-title__item').forEach((item)=>{
 
       item.addEventListener('click', (e)=>{
-console.log(e.target.innerText)
 if(e.target.innerText === 'Branding'){
 document.querySelectorAll('.works__item').forEach((works)=>{
   works.style.display = 'none'
