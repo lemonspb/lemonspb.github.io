@@ -119,30 +119,26 @@ $(document).ready(function() {
     });
   }
 
-  function WorksTab() {
-
+  function WorksTab(...tabs) {
     document.querySelectorAll(".nav-title__item").forEach(item => {
       item.addEventListener("click", e => {
-    
-        for (let i = 0; i < arguments.length; i++) {
-          if (e.target.innerText === arguments[i] ) {
-           document.querySelectorAll(".works__item").forEach(works => {
-             works.style.display = "none";
-             if (works.classList.contains(arguments[i].toLowerCase())) {
-               works.style.display = "block";
-             }
-           });
+        tabs.forEach((tab)=>{
+          if (e.target.innerText === tab) {
+            document.querySelectorAll(".works__item").forEach(works => {
+              works.style.display = "none";
+              if (works.classList.contains(tab.toLowerCase())) {
+                works.style.display = "block";
+              }
+            });
           }
-     }
+        });
       });
     });
   }
-  
-  
 
   Modal();
   readMore();
   headerFixed();
   zoomImg();
-  WorksTab('Branding', 'All', 'Design', 'Development','Strategy');
+  WorksTab("Branding", "All", "Design", "Development", "Strategy");
 });
