@@ -538,6 +538,8 @@ header {
 }
 
 .works__item {
+  animation-name: animateWorks;
+  animation-duration: 1s;
   padding: 5px 15px;
   max-width: 33.33333%;
   display: -webkit-box;
@@ -1196,4 +1198,8 @@ textarea {
   .adress__item {
     padding: 10px;
   }
+}
+@keyframes animateWorks {
+  from {transform: scale(0); opacity:0;}
+  to {transform:scale(1); opacity:1;}
 }

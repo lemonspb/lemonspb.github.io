@@ -119,57 +119,30 @@ $(document).ready(function() {
     });
   }
 
-  function WorksTab(){
-    document.querySelectorAll('.nav-title__item').forEach((item)=>{
+  function WorksTab() {
 
-      item.addEventListener('click', (e)=>{
-if(e.target.innerText === 'Branding'){
-document.querySelectorAll('.works__item').forEach((works)=>{
-  works.style.display = 'none'
-if(works.classList.contains('branding')){
-  works.style.display = 'block';
-}
-});
-}
-if(e.target.innerText === 'All'){
-  document.querySelectorAll('.works__item').forEach((works)=>{
-    works.style.display = 'none'
-  if(works.classList.contains('works__item')){
-    works.style.display = 'block';
-  }
-  });
-}
-if(e.target.innerText === 'Design'){
-  document.querySelectorAll('.works__item').forEach((works)=>{
-    works.style.display = 'none'
-  if(works.classList.contains('design')){
-    works.style.display = 'block';
-  }
-  });
-}
-if(e.target.innerText === 'Development'){
-  document.querySelectorAll('.works__item').forEach((works)=>{
-    works.style.display = 'none'
-  if(works.classList.contains('development')){
-    works.style.display = 'block';
-  }
-  });
-}
-if(e.target.innerText === 'Strategy'){
-  document.querySelectorAll('.works__item').forEach((works)=>{
-    works.style.display = 'none'
-  if(works.classList.contains('strategy')){
-    works.style.display = 'block';
-  }
-  });
-}
+    document.querySelectorAll(".nav-title__item").forEach(item => {
+      item.addEventListener("click", e => {
+    
+        for (let i = 0; i < arguments.length; i++) {
+          if (e.target.innerText === arguments[i] ) {
+           document.querySelectorAll(".works__item").forEach(works => {
+             works.style.display = "none";
+             if (works.classList.contains(arguments[i].toLowerCase())) {
+               works.style.display = "block";
+             }
+           });
+          }
+     }
       });
     });
   }
+  
+  
 
   Modal();
   readMore();
   headerFixed();
   zoomImg();
-  WorksTab();
+  WorksTab('Branding', 'All', 'Design', 'Development','Strategy');
 });
