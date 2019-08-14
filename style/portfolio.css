@@ -175,7 +175,7 @@ flex-direction: row;
     margin-top: 100vh;
 }
 
-.about-me__title, .scills__title{
+.about-me__title, .skills__title{
     color: rgb(51, 51, 51);
     font-size: 25px;
     margin-top: -30px;
@@ -194,11 +194,11 @@ flex-direction: row;
 
 
 
-.scills-list   {
+.skills-list   {
     color:black;
     line-height: 30px;
 }
-.scills-list__item{
+.skills-list__item{
     color: rgb(148, 140, 136);
     font-size: 18px;
 
@@ -220,6 +220,7 @@ flex-direction: row;
 }
 .portfolio-item{
 padding: 20px;
+box-sizing: border-box;
 }
 .portfolio-item__title {
     cursor: pointer;
