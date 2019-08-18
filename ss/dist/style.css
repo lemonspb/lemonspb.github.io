@@ -261,7 +261,7 @@ p {
   justify-content: center;
   height: 100vh;
   padding-top: 100px;
-  background-image: url(img/2-layers.png);
+  background-image: url(img/b472a35c99c0b3899191087686131013.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover; }
@@ -553,7 +553,7 @@ p {
 /*video-pre
 ============ */
 .video-pre {
-  background-image: url(img/photo.jpg);
+  background-image: url(img/9685d0473cba17fc2cba765edbf916da.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -644,7 +644,7 @@ p {
     line-height: 32px;
     list-style-type: none; }
     .excellent-devices .list-features__item::before {
-      content: url(img/01.jpg);
+      content: url(img/37f02da90245aa131ab4f01e11ae45e5.jpg);
       margin-right: 30px; }
 
 /*exelent-dev
@@ -694,7 +694,7 @@ p {
 /*partners
 ============ */
 .partners {
-  background-image: url(img/2-layers.jpg);
+  background-image: url(img/11aff6c6cebca794713d649dac3fb198.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
