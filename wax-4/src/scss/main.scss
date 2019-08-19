@@ -232,7 +232,7 @@ p {
   justify-content: center;
   height: 100vh;
   padding-top: 100px;
-  background-image: url(../../src/img/header/2-layers.png);
+  background-image: url(../img/header/2-layers.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -627,7 +627,7 @@ p {
 /*video-pre
 ============ */
 .video-pre {
-  background-image: url(../../src/img/video-img/photo.jpg);
+  background-image: url(../img/video-img/photo.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -749,7 +749,7 @@ p {
       list-style-type: none;
 
       &::before {
-        content: url(../../src/img/exellent/01.jpg);
+        content: url(../img/exellent/01.jpg);
         margin-right: 30px;
       }
     }
@@ -816,7 +816,7 @@ p {
 /*partners
 ============ */
 .partners {
-  background-image: url(../../src/img/partners/2-layers.jpg);
+  background-image: url(../img/partners/2-layers.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

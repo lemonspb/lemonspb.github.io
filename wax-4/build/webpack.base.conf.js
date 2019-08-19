@@ -1,9 +1,9 @@
 const path = require('path')
 const webpack = require('webpack');
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PATHS = {
   src: path.join(__dirname, '../src'),
@@ -41,8 +41,7 @@ module.exports = {
         'style-loader',
         MiniCssExtractPlugin.loader,
         {
-          loader: 'css-loader',
-          options: { sourceMap: true }
+          loader: 'css-loader?url=false',
         }, {
           loader: 'postcss-loader',
           options: { sourceMap: true, config: { path: `${PATHS.src}/js/postcss.config.js` } }
@@ -57,8 +56,7 @@ module.exports = {
         'style-loader',
         MiniCssExtractPlugin.loader,
         {
-          loader: 'css-loader',
-          options: { sourceMap: true }
+          loader: 'css-loader?url=false',
         }, {
           loader: 'postcss-loader',
           options: { sourceMap: true, config: { path: `${PATHS.src}/js/postcss.config.js` } }
@@ -76,6 +74,7 @@ module.exports = {
       template: `${PATHS.src}/index.html`,
       filename: './index.html'
     }),
+    
     new CopyWebpackPlugin([
       { from: `${PATHS.src}/img`, to: `${PATHS.assets}img` },
       { from: `${PATHS.src}/static`, to: '' },
