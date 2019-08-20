@@ -47,7 +47,6 @@ button:hover {
   flex-direction: column-reverse;
   min-height: 800px;
   background-size: auto;
-  background-image: url("../image/Movie-Posters.jpg");
   width: 100%;
   justify-content: start;
   display: flex;
@@ -56,18 +55,7 @@ button:hover {
   background-position: right bottom;
 }
 
-.overlay-header {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0.9;
-  transition: 0.5s ease;
-  background-color: black;
-}
+
 
 .hero-content {
   z-index: 1;
@@ -96,6 +84,7 @@ button:hover {
   position: absolute;
   z-index: 1;
   width: 100%;
+  color: tomato;
   color: tomato;
   display: flex;
   justify-content: center;
@@ -131,7 +120,7 @@ button.search-film {
 
 .hero-inner__button {
   width: 100%;
-  background-color: #141414;
+  background-color: #000000;
   border-bottom: 2px solid #3d3d3d;
   border-right: none;
   display: flex;
@@ -150,13 +139,12 @@ button.search-film {
 }
 
 .item-icon:hover {
-  transform: scale(1.1);
   cursor: pointer;
 }
 
 .item-icon__svg {
   fill: white;
-  width: 100px;
+  width: 50px;
 }
 
 .item-icon:hover .item-icon__text {
@@ -206,8 +194,8 @@ button.search-film {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
-  animation-name: animatetop;
-  animation-duration: 1s;
+  animation-name: scale;
+  animation-duration: 0.5s;
   border-radius: 0.3rem;
   outline: 0;
 }
@@ -484,4 +472,17 @@ button.search-film {
 
 .visible {
   display: block;
+}
+
+
+
+@keyframes scale {
+  from {
+    transform: scale(0);
+    
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
