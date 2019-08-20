@@ -5,6 +5,9 @@ html {
 body {
     color: white;
     margin: 0;
+    font-family: 'Montserrat', sans-serif;
+
+
 }
 .btn {
     border: 2px solid black;
@@ -185,7 +188,7 @@ flex-direction: row;
 
 .about-me__text {
     color: rgb(148, 140, 136);
-    line-height: 22px;
+    line-height: 25px;
     font-size: 16px;
     column-count: 2;
 }
@@ -211,7 +214,11 @@ flex-direction: row;
     flex-direction: column;
    
 }
-
+.portfolio__inner{
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+}
 .portfolio__title {
     font-size: 25px;
     padding-bottom: 40px;
@@ -284,7 +291,11 @@ padding: 10px;
     background-size: cover;
     background-position: center;
 }
-
+.waxom-img{
+    background-image: url("/image/Screenshot\ from\ 2019-08-20\ 19-15-56.png");
+    background-size: cover;
+    background-position: center;
+}
 .page-footer {
     text-align: center;
     color: rgb(51, 51, 51);
