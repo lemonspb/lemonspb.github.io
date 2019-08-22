@@ -16,7 +16,8 @@ L.tileLayer(
 /* Fetch data */
 
 function SEARCH(city) {
-    fetch(`${BASE_URL}/weather?q=${city},ru&units=metric&${API_KEY}`).then(async response => {
+    fetch(`${BASE_URL}/weather?q=${city},ru&units=metric&${API_KEY}`,{
+        method: 'GET'}).then(async response => {
         if (response.status !== 200) {
             return;
         }
@@ -71,11 +72,14 @@ const store = {
 function TEMP(){
 store.weather.onChange(weather=>{
     console.log(weather)
-    var x = new Date();
+   
     MAP.setView([weather.coord.lat, weather.coord.lon], 13);
     const MARKER = L.marker([weather.coord.lat, weather.coord.lon]).addTo(MAP);
     MARKER.bindPopup(`
-   <div class='temp'> температура: ${Math.round(weather.main.temp)} градусов </div>
+    <div class='popup__name'>${weather.name} </div>
+
+   <div class='popup__temp'> температура: ${Math.round(weather.main.temp)}&#8451;
+    градусов </div>
    ` ).openPopup();
 })  
 }
@@ -89,7 +93,7 @@ listCity.forEach((city)=>{
     ListItem.classList.add('list__item')
     ListItem.innerText = city.city
     ListItem.addEventListener('click',()=>{
-        console.log(ListItem.innerText)
+        console.log(ListItem.innerText);
         SEARCH(ListItem.innerText);
         TEMP();
     })
