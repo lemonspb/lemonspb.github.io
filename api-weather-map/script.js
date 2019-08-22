@@ -25,6 +25,14 @@ function SEARCH(city) {
     });
 }
 
+fetch(`https://gist.githubusercontent.com/gorborukov/0722a93c35dfba96337b/raw/435b297ac6d90d13a68935e1ec7a69a225969e58/russia`).then(async response => {
+    if (response.status !== 200) {
+        return;
+    }
+    const data = await response.json();
+    store.listCity.set(data)
+});
+
 
 /* Utilities */
 
@@ -43,7 +51,6 @@ class Observable {
 }
 
 document.querySelector(".search_button").addEventListener("click", () => {
-    console.log(SEARCH_CITY.value);
     SEARCH(SEARCH_CITY.value);
     TEMP();
 });
@@ -57,18 +64,42 @@ document.addEventListener("keydown", e => {
 });
 
 const store = {
-    weather: new Observable()
+    weather: new Observable(),
+    listCity: new Observable()
 };
 
 function TEMP(){
 store.weather.onChange(weather=>{
     console.log(weather)
+    var x = new Date();
     MAP.setView([weather.coord.lat, weather.coord.lon], 13);
-    const marker = L.marker([weather.coord.lat, weather.coord.lon]).addTo(MAP);
-   marker.bindPopup(`
+    const MARKER = L.marker([weather.coord.lat, weather.coord.lon]).addTo(MAP);
+    MARKER.bindPopup(`
    <div class='temp'> температура: ${Math.round(weather.main.temp)} градусов </div>
    ` ).openPopup();
 })  
 }
+function GetCityList(){
 
+    store.listCity.onChange(listCity=>{
+        const List = document.querySelector('.listCity');
+       
+listCity.forEach((city)=>{
+    const ListItem = document.createElement('li'); 
+    ListItem.classList.add('list__item')
+    ListItem.innerText = city.city
+    ListItem.addEventListener('click',()=>{
+        console.log(ListItem.innerText)
+        SEARCH(ListItem.innerText);
+        TEMP();
+    })
+    List.append(ListItem);
+    
+})
+
+
+}
+ )}
+
+    GetCityList()
 SEARCH();
