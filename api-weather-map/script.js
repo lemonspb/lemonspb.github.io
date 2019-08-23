@@ -73,8 +73,6 @@ const store = {
 
 function TEMP() {
     store.weather.onChange(weather => {
-        console.log(weather);
-
         MAP.setView([weather.coord.lat, weather.coord.lon], 10);
         const MARKER = L.marker([weather.coord.lat, weather.coord.lon]).addTo(MAP);
         MARKER.bindPopup(
@@ -85,13 +83,29 @@ function TEMP() {
      weather.main.temp
    )}&#8451;</span>
     градусов </div>
-    <img src='http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png' title='${weather.weather[0].main}'></img> `
+    <img src='http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png' title='${weather.weather[0].main}'></img>
+    <div>Местное время ${getDate(weather.timezone)}</div>
+    `
+
         ).openPopup();
     });
 }
 
+function getDate(timezone) {
+
+    const data = new Date().getUTCHours();
+
+    if (data + (timezone / 60) / 60 >= 24) {
+        return `0${data+(timezone/60)/60-24}:${new Date().getMinutes()}`
+    } else {
+        return `${data+(timezone/60)/60}:${new Date().getMinutes()}`
+    }
+}
+
+
 function GetCityList() {
     store.listCity.onChange(listCities => {
+
         const List = document.querySelector(".listCity");
         const names = listCities.map(c => c.city.trim());
         const unique = Array.from(new Set(names));
@@ -111,12 +125,12 @@ function GetCityList() {
 
             List.append(ListItem);
             SEARCH_CITY.addEventListener('input', () => {
-               if(!ListItem.innerText.toLowerCase().includes(SEARCH_CITY.value.toLowerCase())){
-                ListItem.classList.add('hide')
-               }
-               if(SEARCH_CITY.value === ''){
-                ListItem.classList.remove('hide')
-               }
+                if (!ListItem.innerText.toLowerCase().includes(SEARCH_CITY.value.toLowerCase())) {
+                    ListItem.classList.add('hide');
+                }
+                if (SEARCH_CITY.value === '') {
+                    ListItem.classList.remove('hide');
+                }
             });
         });
 
@@ -128,4 +142,3 @@ function GetCityList() {
 
 GetCityList();
 SEARCH();
-
