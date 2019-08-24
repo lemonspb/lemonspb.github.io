@@ -79,11 +79,19 @@ body{
 
 @media screen and  (max-width: 700px){
     .pane1{
-        min-width: 200px;
+        min-width: 150px;
          
 
     }
     .listCity{
         overflow-x:hidden;
     }
+
+    .leaflet-popup-content{
+        width: 150px;
+    }
+    .popup__temp span{
+display: block;
+    }
+
 }
