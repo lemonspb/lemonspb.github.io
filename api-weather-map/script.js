@@ -49,6 +49,26 @@ class Observable {
     }
 }
 
+function numberT(n, text) {
+    n   = Math.abs(n) % 100;
+    var n1 = n % 10;
+    
+    if (n > 10 && n < 20) {
+        return text[2];
+    }
+    
+    if (n1 > 1 && n1 < 5) {
+        return text[1];
+    }
+    
+    if (n1 === 1) {
+        return text[0];
+    }
+    
+    return text[2];
+}
+
+
 
 
 document.querySelector(".control__button").addEventListener("click", () => {
@@ -79,8 +99,8 @@ function TEMP() {
   
    <div class='popup__temp'> температура:<span>${Math.round(
      weather.main.temp
-   )}&#8451;</span>
-    градусов </div>
+   )}&#8451;</span> ${numberT(weather.main.temp, ['градус', 'градуса', 'градуcов'])}
+     </div>
     <img src='http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png' title='${weather.weather[0].main}'></img>
     <div>Местное время ${getDate(weather.timezone)}</div>
     `
@@ -124,7 +144,7 @@ function GetCityList() {
             while (List.firstChild) {
                 List.removeChild(List.firstChild);
             }
-            unique.filter(city => city.toLowerCase().includes(SEARCH_CITY.value.toLowerCase())).sort().forEach(cityName => {
+            unique.filter(city => city.toLowerCase().startsWith(SEARCH_CITY.value.toLowerCase())).sort().forEach(cityName => {
                 const ListItem = document.createElement("li");
                 ListItem.classList.add("list__item");
                 ListItem.innerText = cityName;
@@ -133,10 +153,7 @@ function GetCityList() {
                     TEMP();
                 });
                 List.append(ListItem);
-if(List.children.length == 0){
 
-    List.innerHTML = `<div>jоооооооо</div>`
-}
             });
         });
 
