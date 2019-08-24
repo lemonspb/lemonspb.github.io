@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .container{
@@ -18,14 +19,14 @@ body{
 .listCity{
     margin: 0;  
     overflow-y: scroll;
-    height:95vh;
+    height:94vh;
     padding: 0;
 }
 .control{
     width: 100%;
     display: flex;
     justify-content: space-between;
-    height: 5vh;
+    height: 6vh;
 }
 .control__button{
     width: 20%;
@@ -43,6 +44,8 @@ body{
     border: none;
 }
 .list__item{
+    font-weight: 700;
+    font-size: 16px;
     margin: 0;
     border-bottom: solid 1px #eee;
     padding: 10px;
@@ -72,4 +75,15 @@ body{
 
 .hide{
     display: none;
+}
+
+@media screen and  (max-width: 700px){
+    .pane1{
+        min-width: 200px;
+         
+
+    }
+    .listCity{
+        overflow-x:hidden;
+    }
 }

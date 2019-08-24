@@ -14,9 +14,7 @@ L.tileLayer(
 /* Fetch data */
 
 function SEARCH(city) {
-    fetch(`${BASE_URL}/weather?q=${city},ru&units=metric&${API_KEY}`, {
-        method: "GET"
-    }).then(async response => {
+    fetch(`${BASE_URL}/weather?q=${city},ru&units=metric&${API_KEY}`).then(async response => {
         if (response.status !== 200) {
             return;
         }
@@ -109,10 +107,6 @@ function GetCityList() {
         const List = document.querySelector(".listCity");
         const names = listCities.map(c => c.city.trim());
         const unique = Array.from(new Set(names));
-        // SEARCH_CITY.addEventListener('input', () => {
-        //     const filtered = unique.filter(city => city.toLowerCase().includes(SEARCH_CITY.value.toLowerCase()));
-        //     console.log(filtered);
-        // });
 
         unique.sort().forEach(cityName => {
             const ListItem = document.createElement("li");
@@ -122,19 +116,29 @@ function GetCityList() {
                 SEARCH(ListItem.innerText);
                 TEMP();
             });
-
             List.append(ListItem);
-            SEARCH_CITY.addEventListener('input', () => {
-                if (!ListItem.innerText.toLowerCase().includes(SEARCH_CITY.value.toLowerCase())) {
-                    ListItem.classList.add('hide');
-                }
-                if (SEARCH_CITY.value === '') {
-                    ListItem.classList.remove('hide');
-                }
+
+        });
+        SEARCH_CITY.addEventListener('input', () => {
+
+            while (List.firstChild) {
+                List.removeChild(List.firstChild);
+            }
+            unique.filter(city => city.toLowerCase().includes(SEARCH_CITY.value.toLowerCase())).sort().forEach(cityName => {
+                const ListItem = document.createElement("li");
+                ListItem.classList.add("list__item");
+                ListItem.innerText = cityName;
+                ListItem.addEventListener("click", () => {
+                    SEARCH(ListItem.innerText);
+                    TEMP();
+                });
+                List.append(ListItem);
+if(List.children.length == 0){
+
+    List.innerHTML = `<div>jоооооооо</div>`
+}
             });
         });
-
-
 
     });
 }
