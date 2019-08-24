@@ -108,11 +108,15 @@ function TEMP() {
     <img src='http://openweathermap.org/img/wn/${
       weather.weather[0].icon
     }@2x.png' title='${weather.weather[0].main}'></img>
-    <div>Местное время ${getDate(weather.timezone)}</div>
-    `
+    <div>Местное время ${getDate(weather.timezone)}</div>`
+    
     ).openPopup();
+  
   });
+
 }
+
+
 
 function getDate(timezone) {
   const data = new Date().getUTCHours();
@@ -124,6 +128,10 @@ function getDate(timezone) {
   }
 }
 
+function insertMark(string, pos, len) {
+  
+  return `${string.slice(0, pos)}<mark>${string.slice(pos, pos + len)}</mark>${string.slice(pos + len)}`
+}
 function GetCityList() {
   store.listCity.onChange(listCities => {
     const List = document.querySelector(".listCity");
@@ -133,7 +141,7 @@ function GetCityList() {
     unique.sort().forEach(cityName => {
       const ListItem = document.createElement("li");
       ListItem.classList.add("list__item");
-      ListItem.innerText = cityName;
+      ListItem.innerHTML = cityName;
       ListItem.addEventListener("click", () => {
         SEARCH(ListItem.innerText);
         TEMP();
@@ -152,7 +160,7 @@ function GetCityList() {
         .forEach(cityName => {
           const ListItem = document.createElement("li");
           ListItem.classList.add("list__item");
-          ListItem.innerText = cityName;
+          ListItem.innerHTML = insertMark(cityName, cityName.toLowerCase().startsWith(SEARCH_CITY.value.toLowerCase().length), SEARCH_CITY.value.toLowerCase().length) ;
           ListItem.addEventListener("click", () => {
             SEARCH(ListItem.innerText);
             TEMP();
