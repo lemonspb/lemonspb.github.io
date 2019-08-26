@@ -1,5 +1,5 @@
-const MAP = L.map("mapid");
-const SEARCH_CITY = document.querySelector(".control__search");
+const map = L.map("mapid");
+const search_city = document.querySelector(".control__search");
 const API_KEY = "APPID=9c8eb3371091b748edb50cc9d42feed3";
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
@@ -11,7 +11,7 @@ L.tileLayer(
     accessToken:
       "pk.eyJ1IjoibWlzaGFza29wZW5rbyIsImEiOiJjanptcGhocm0wZjAyM25wN3NmZndlYnNrIn0.iRrbRZu8d_zkoLH5VXezAA"
   }
-).addTo(MAP.setView([55.75, 37.62], 3));
+).addTo(map.setView([55.75, 37.62], 3));
 
 /* Fetch data */
 
@@ -73,14 +73,14 @@ function numberT(n, text) {
 }
 
 document.querySelector(".control__button").addEventListener("click", () => {
-  SEARCH(SEARCH_CITY.value);
-  TEMP();
+  SEARCH(search_city.value);
+  showTemperature();
 });
 
 document.addEventListener("keydown", e => {
   if (e.keyCode === 13) {
-    SEARCH(SEARCH_CITY.value);
-    TEMP();
+    SEARCH(search_city.value);
+    showTemperature();
   }
 });
 
@@ -89,17 +89,18 @@ const store = {
   listCity: new Observable()
 };
 
-function TEMP() {
+function showTemperature() {
   store.weather.onChange(weather => {
-    MAP.setView([weather.coord.lat, weather.coord.lon], 10);
-    const MARKER = L.marker([weather.coord.lat, weather.coord.lon]).addTo(MAP);
+    console.log(weather)
+    map.setView([weather.coord.lat, weather.coord.lon], 10);
+    const MARKER = L.marker([weather.coord.lat, weather.coord.lon]).addTo(map);
     MARKER.bindPopup(
       `
     <div class='popup__name'>${weather.name} </div>
   
-   <div class='popup__temp'> температура:<span>${Math.round(
+   <div class='popup__temp'> температура: <span>${Math.round(
      weather.main.temp
-   )}&#8451;</span> ${numberT(weather.main.temp, [
+   )}&#8451;</span> ${numberT(Math.round(weather.main.temp), [
         "градус",
         "градуса",
         "градуcов"
@@ -109,67 +110,73 @@ function TEMP() {
       weather.weather[0].icon
     }@2x.png' title='${weather.weather[0].main}'></img>
     <div>Местное время ${getDate(weather.timezone)}</div>`
-    
     ).openPopup();
-  
   });
-
 }
 
-
+function createList(city, parentList, citypast) {
+  const ListItem = document.createElement("li");
+  ListItem.classList.add("list__item");
+  ListItem.innerHTML = city;
+  ListItem.addEventListener("click", () => {
+    SEARCH(citypast);
+    showTemperature();
+  });
+  parentList.append(ListItem);
+}
 
 function getDate(timezone) {
-  const data = new Date().getUTCHours();
+  const date = new Date().getUTCHours();
 
-  if (data + timezone / 60 / 60 >= 24) {
-    return `0${data + timezone / 60 / 60 - 24}:${new Date().getMinutes()<10? '0'+new Date().getMinutes(): new Date().getMinutes() }`;
-  } else {
-    return `${data + timezone / 60 / 60}:${new Date().getMinutes()<10? '0'+new Date().getMinutes(): new Date().getMinutes() }`;
+  let hours = date + timezone / 60 / 60;
+  if (date + timezone / 60 / 60 >= 24) {
+    hours = "0" + (hours - 24);
   }
+
+  let minutes = new Date().getMinutes();
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+
+  return `${hours}:${minutes}`;
 }
 
 function insertMark(string, pos, len) {
-  
-  return `${string.slice(0, pos)}<mark>${string.slice(pos, pos + len)}</mark>${string.slice(pos + len)}`
+  return `${string.slice(0, pos)}<mark>${string.slice(
+    pos,
+    pos + len
+  )}</mark>${string.slice(pos + len)}`;
 }
-function GetCityList() {
+
+function getCityList() {
   store.listCity.onChange(listCities => {
     const List = document.querySelector(".listCity");
     const names = listCities.map(c => c.city.trim());
     const unique = Array.from(new Set(names));
-
-    unique.sort().forEach(cityName => {
-      const ListItem = document.createElement("li");
-      ListItem.classList.add("list__item");
-      ListItem.innerHTML = cityName;
-      ListItem.addEventListener("click", () => {
-        SEARCH(ListItem.innerText);
-        TEMP();
-      });
-      List.append(ListItem);
+    const sorted = unique.sort();
+    sorted.forEach(cityName => {
+      const ar = cityName;
+      createList(cityName, List, ar);
     });
-    SEARCH_CITY.addEventListener("input", () => {
+    search_city.addEventListener("input", () => {
       while (List.firstChild) {
         List.removeChild(List.firstChild);
       }
-      unique
+      sorted
         .filter(city =>
-          city.toLowerCase().startsWith(SEARCH_CITY.value.toLowerCase())
+          city.toLowerCase().startsWith(search_city.value.toLowerCase())
         )
-        .sort()
         .forEach(cityName => {
-          const ListItem = document.createElement("li");
-          ListItem.classList.add("list__item");
-          ListItem.innerHTML = insertMark(cityName, cityName.toLowerCase().startsWith(SEARCH_CITY.value.toLowerCase().length), SEARCH_CITY.value.toLowerCase().length) ;
-          ListItem.addEventListener("click", () => {
-            SEARCH(ListItem.innerText);
-            TEMP();
-          });
-          List.append(ListItem);
+          const city = insertMark(
+            cityName,
+            cityName.toLowerCase().startsWith(search_city.value.length),
+            search_city.value.length
+          );
+          createList(city, List, cityName);
         });
     });
   });
 }
 
-GetCityList();
+getCityList();
 SEARCH();
