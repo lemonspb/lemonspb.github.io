@@ -1,0 +1,15 @@
+doctype html
+html
+    include ../elements/head/head
+    +head('Page title', 'Page description', 'Page keywords')
+    body
+      include  ../elements/sprite/sprite.pug
+      include ../elements/header/header
+      include ../elements/timeline/timeline
+      include ../elements/team/team
+      include ../elements/features/features
+      include ../elements/contacts/contacts
+      include ../elements/footer/footer
+
+      script(src="js/libs.min.js")
+      script(src="js/custom.js")
