@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1.0, width=device-width">
+        <meta name="HandheldFriendly" content="True">
+        <title>Page title</title>
+        <meta name="description" content="Page description" lang="ru">
+        <meta name="keywords" content="Page keywords" lang="ru">
+        <meta property="og:title" content="Page title">
+        <meta property="og:description" content="Page description">
+        <meta property="og:image" content="img/og-image.jpg">
+        <meta property="og:locale" content="ru_RU">
+        <meta property="og:url" content="http://yoursite.ru">
+        <link rel="image_src" href="img/og-image.jpg">
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <link href="css/libs.min.css" rel="stylesheet" type="text/css"><!-- fotorama.css & fotorama.js. -->
+        <link href="css/style.css" rel="stylesheet" type="text/css">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+    </head>
+    <body><svg style="display:none">
+            <symbol id="facebook" viewbox="0 0 96.124 96.123">
+                <g>
+                    <path id="facebook" d="M72.089,0.02L59.624,0C45.62,0,36.57,9.285,36.57,23.656v10.907H24.037c-1.083,0-1.96,0.878-1.96,1.961v15.803          c0,1.083,0.878,1.96,1.96,1.96h12.533v39.876c0,1.083,0.877,1.96,1.96,1.96h16.352c1.083,0,1.96-0.878,1.96-1.96V54.287h14.654          c1.083,0,1.96-0.877,1.96-1.96l0.006-15.803c0-0.52-0.207-1.018-0.574-1.386c-0.367-0.368-0.867-0.575-1.387-0.575H56.842v-9.246          c0-4.444,1.059-6.7,6.848-6.7l8.397-0.003c1.082,0,1.959-0.878,1.959-1.96V1.98C74.046,0.899,73.17,0.022,72.089,0.02z"> </path>
+                </g>
+            </symbol>
+            <symbol id="twitter" viewbox="0 0 512 512">
+                <g>
+                    <path id="twitter" d="M512,97.248c-19.04,8.352-39.328,13.888-60.48,16.576c21.76-12.992,38.368-33.408,46.176-58.016          c-20.288,12.096-42.688,20.64-66.56,25.408C411.872,60.704,384.416,48,354.464,48c-58.112,0-104.896,47.168-104.896,104.992          c0,8.32,0.704,16.32,2.432,23.936c-87.264-4.256-164.48-46.08-216.352-109.792c-9.056,15.712-14.368,33.696-14.368,53.056          c0,36.352,18.72,68.576,46.624,87.232c-16.864-0.32-33.408-5.216-47.424-12.928c0,0.32,0,0.736,0,1.152          c0,51.008,36.384,93.376,84.096,103.136c-8.544,2.336-17.856,3.456-27.52,3.456c-6.72,0-13.504-0.384-19.872-1.792          c13.6,41.568,52.192,72.128,98.08,73.12c-35.712,27.936-81.056,44.768-130.144,44.768c-8.608,0-16.864-0.384-25.12-1.44          C46.496,446.88,101.6,464,161.024,464c193.152,0,298.752-160,298.752-298.688c0-4.64-0.16-9.12-0.384-13.568          C480.224,136.96,497.728,118.496,512,97.248z"> </path>
+                </g>
+            </symbol>
+            <symbol id="in" viewbox="0 0 430.117 430.118">
+                <g>
+                    <path id="in" d="M398.355,0H31.782C14.229,0,0.002,13.793,0.002,30.817v368.471          c0,17.025,14.232,30.83,31.78,30.83h366.573c17.549,0,31.76-13.814,31.76-30.83V30.817C430.115,13.798,415.904,0,398.355,0z          M130.4,360.038H65.413V165.845H130.4V360.038z M97.913,139.315h-0.437c-21.793,0-35.92-14.904-35.92-33.563          c0-19.035,14.542-33.535,36.767-33.535c22.227,0,35.899,14.496,36.331,33.535C134.654,124.415,120.555,139.315,97.913,139.315z          M364.659,360.038h-64.966V256.138c0-26.107-9.413-43.921-32.907-43.921c-17.973,0-28.642,12.018-33.327,23.621          c-1.736,4.144-2.166,9.94-2.166,15.728v108.468h-64.954c0,0,0.85-175.979,0-194.192h64.964v27.531          c8.624-13.229,24.035-32.1,58.534-32.1c42.76,0,74.822,27.739,74.822,87.414V360.038z M230.883,193.99          c0.111-0.182,0.266-0.401,0.42-0.614v0.614H230.883z"></path>
+                </g>
+            </symbol>
+        </svg>
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <nav class="nav__left"><a class="nav__link" href="#">Home</a><a class="nav__link" href="#">About Us</a><a class="nav__link" href="#">Team</a></nav>
+                    <div class="logo"> <img src="../img/Logo.jpg" alt="logo"></div>
+                    <nav class="nav__right"><a class="nav__link" href="#">Services</a><a class="nav__link" href="#">Blog</a><a class="nav__link" href="#">Contact Us</a></nav>
+                </div>
+                <div class="burger-menu"><span class="burger-menu__line">       </span><span class="burger-menu__line">       </span><span class="burger-menu__line">       </span></div>
+            </div>
+        </header>
+        <div class="promo">
+            <div class="container">
+                <div class="promo__inner">
+                    <h1 class="promo__title">We build it with passion</h1>
+                    <p class="promo__subtitle">Just to be clear, we do this for fun not for you, just kidding.</p>
+                    <div class="btn">READ MORE</div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-menu"><a class="btn__close">&times;</a>
+            <div class="logo--mobile"> <img src="../img/Logo.jpg" alt="logo"></div><a class="mobile-menu__link" href="#">Home</a><a class="mobile-menu__link" href="#">About Us</a><a class="mobile-menu__link" href="#">Team</a><a class="mobile-menu__link" href="#">Services</a><a class="mobile-menu__link" href="#">Blog</a><a class="mobile-menu__link" href="#">Contact Us</a></div>
+        <section class="timeline">
+            <div class="container">
+                <div class="timeline__inner">
+                    <div class="timeline-block timeline-block__left" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                        <div class="timeline-block__content">
+                            <h3>2015</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiselit. Vivamus varius nec diam vitae hendrerit bigus mit.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-block timeline-block__right" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                        <div class="timeline-block__content">
+                            <h3>2016</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiselit. Vivamus varius nec diam vitae hendrerit bigus mit.Begitus vit urna nulla.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-block timeline-block__left" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                        <div class="timeline-block__content">
+                            <h3>2017</h3>
+                            <p>Sed at auctor sem, nec tincidunt elit. Pellentesque enim turpis, porttitor ac orci in, ultrices efficitur nisl. Ut odio libero, sodales a tellus eleifend, suscipit dapibus mi.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-block timeline-block__right" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                        <div class="timeline-block__content">
+                            <h3>2018</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiselit. Vivamus varius nec diam vitae hendrerit bigus mit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="team">
+            <div class="container">
+                <div class="title">This is our team</div>
+                <div class="subtitle">We are small but effective and ...</div>
+                <div class="team__inner">
+                    <div class="team-item">
+                        <div class="team-item__img"><img src="../img/team_1.jpg" alt="" srcset=""></div>
+                        <div class="team-item__name">Mark Once</div>
+                        <div class="team-item__prof">Designer & Front-End Developer</div>
+                        <div class="team-item__social"><svg class="social-icon">
+                                <use xlink:href="#twitter"></use>
+                            </svg><svg class="social-icon">
+                                <use xlink:href="#facebook"></use>
+                            </svg></div>
+                    </div>
+                    <div class="team-item">
+                        <div class="team-item__img"><img src="../img/team_2.jpg" alt="" srcset=""></div>
+                        <div class="team-item__name">Justin Twice</div>
+                        <div class="team-item__prof">Founder & CEO</div>
+                        <div class="team-item__social"><svg class="social-icon">
+                                <use xlink:href="#twitter"></use>
+                            </svg><svg class="social-icon">
+                                <use xlink:href="#facebook"></use>
+                            </svg></div>
+                    </div>
+                    <div class="team-item">
+                        <div class="team-item__img"><img src="../img/team_3.jpg" alt="" srcset=""></div>
+                        <div class="team-item__name">Antonio Never</div>
+                        <div class="team-item__prof">Someone & Somewhere</div>
+                        <div class="team-item__social"><svg class="social-icon">
+                                <use xlink:href="#twitter"></use>
+                            </svg><svg class="social-icon">
+                                <use xlink:href="#facebook"></use>
+                            </svg></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="features">
+            <div class="container">
+                <div class="title title--white pg-top-100">We provide you everything</div>
+                <div class="subtitle subtitle--gray">Maybe not everything, but we provide you some stuff.</div>
+                <div class="features__inner">
+                    <div class="features__item">
+                        <div class="features__img"><img src="../img/features_1.png" alt=""></div>
+                        <div class="features__title">Some Analytics</div>
+                        <div class="features__text">Aenean nisi lectus, convallis non lorem sit amet, rhoncus malesuada justo</div>
+                    </div>
+                    <div class="features__item">
+                        <div class="features__img"><img src="../img/features_2.png" alt=""></div>
+                        <div class="features__title"> We provide you love</div>
+                        <div class="features__text">Aenean nisi lectus, convallis non lorem sit amet, rhoncus malesuada justo</div>
+                    </div>
+                    <div class="features__item">
+                        <div class="features__img"><img src="../img/features_3.png" alt=""></div>
+                        <div class="features__title">And Some Cloud</div>
+                        <div class="features__text">Aenean nisi lectus, convallis non lorem sit amet, rhoncus malesuada justo</div>
+                    </div><button class="btn btn--white mr-top-500">VISIT OUR BLOG 5</button>
+                </div>
+            </div>
+            <div class="features__post"> <img src="../img/Post5.png" alt="" srcset=""></div>
+        </section>
+        <section class="contacts">
+            <div class="container">
+                <div class="title">Contact Us</div>
+                <div class="subtitle">We know what we need to do</div>
+                <div class="contacts__inner">
+                    <div class="contacts__adress">
+                        <div class="adress-item">
+                            <div class="adress-item__icon"><a href="#"><img src="../img/Phone_Auricular._Attribute_as_Freepik_from_Flaticon.com.png" alt="" srcset=""></a></div>
+                            <div class="adress-item__text">555-222-333</div>
+                        </div>
+                        <div class="adress-item">
+                            <div class="adress-item__icon"><a href="#"><img src="../img/PIN_2.png" alt=""></a></div>
+                            <div class="adress-item__text">Here is some address</div>
+                        </div>
+                        <div class="adress-item">
+                            <div class="adress-item__icon"><a href="#"><img src="../img/MAIL.png" alt="" srcset=""></a></div>
+                            <div class="adress-item__text">somemail@hotmail.com</div>
+                        </div>
+                    </div>
+                    <div class="contacts__form">
+                        <form class="contact-form" action=""><input type="text" placeholder="Full Name" name="name"><input type="mail" placeholder="Email" name="mail"><input type="phone" placeholder="Number" name="phone"><textarea name="message" cols="30" rows="10" placeholder="Write your Message here..."></textarea><button class="btn btn--submit">Submit</button></form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__inner">
+                    <div class="copiright">Copyright © Kenan Hamidic. All rights reserved.</div>
+                </div>
+            </div>
+        </footer>
+        <script src="js/libs.min.js"></script>
+        <script src="js/custom.js"></script>
+    </body>
+</html>
