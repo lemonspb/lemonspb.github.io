@@ -34,6 +34,7 @@ body {
     height: 100%;
     display: block;
     z-index: -1;
+    transition: width .2s;
 }
 .battle__hp:nth-child(2) .battle__hp-bar{
     left: auto;
