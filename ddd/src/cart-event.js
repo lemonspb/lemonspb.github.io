@@ -4,28 +4,30 @@ import React, {useEffect, useState} from 'react';
 const CartEvent = ({idGet})=>{
     const BASE_URL = "https://kudago.com/public-api/v1.4/";
 
-    // useEffect(() => {
-    //   getEventsId();
-    // },);
+const  id = 123445
+
+    useEffect(() => {
+      getEventsId(id);
+    },);
   
-    // const  [ events, setEvents] = useState([]);
-    // const getEventsId = () => {
-    //   fetch(
-    //     `${BASE_URL}/events?fields=dates,images,description,id,title,place&lang=ru&location=nsk`
-    //   ).then(async response => {
-    //     if (response.status !== 200) {
-    //       return;
-    //     }
-    //     const data = await response.json();
+    const  [ idEvents, setIdEvents] = useState('');
+    const getEventsId = (id) => {
+      fetch(
+        `${BASE_URL}/events/${id}/`
+      ).then(async response => {
+        if (response.status !== 200) {
+          return;
+        }
+        const data = await response.json();
   
-    //     setEvents(data.results);
-    //     console.log(data.results)
-    //   });
-    // };
+        setIdEvents(data);
+        console.log(data)
+      });
+    };
     
 return (
 <div className='list-item'>
-    <div className = 'cart-item__title'>имя {idGet}</div>
+    <div className = 'cart-item__title'>{idEvents.title}</div>
     <div className = 'cart-item__discription'>описание</div>
 
     <div className='cart-item__img'><img src = '' alt=''/></div>

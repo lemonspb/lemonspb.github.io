@@ -28,21 +28,17 @@ const App = () => {
 
   };
 
- const onShowMore=(id)=>{
-        const a =id
-        return a
 
- }
 
   return (
         <div  className='app'>
        <div>
         {events.map(event =>(
-               <List name ={event.title} key={event.id} description = {event.description} image={event.images[0].image} placeId={event.place.id} id={event.id}  onShowMore={()=>onShowMore(event.id)}/>
+               <List name ={event.title} key={event.id} description = {event.description} image={event.images[0].image} placeId={event.place.id} id={event.id} />
 
         ))}
         </div>
-            <CartEvent idGet = {onShowMore}/>
+            <CartEvent />
          
     </div>
   );

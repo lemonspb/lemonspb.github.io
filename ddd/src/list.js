@@ -35,7 +35,7 @@ return (
 
     <div className='list-item__img'><img src = {image} alt=''/></div>
     
-    <button className='list-item__more' onClick={onShowMore}>подробнее</button>
+    <button className='list-item__more'>подробнее</button>
     </div>
 )
 
