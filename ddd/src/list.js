@@ -2,18 +2,21 @@ import React,{ useEffect, useState } from 'react';
 import './list.css'
 
 
-const List = ({name,description,image, placeId,onShowMore, id})=>{
+const List = ({name,description,image, placeId,id,onItemSelected})=>{
 
     const BASE_URL = "https://kudago.com/public-api/v1.4/";
 
-    useEffect(() => {
-      getPlace(placeId);
-    },  );
+    useEffect( () => {
+      
+        getPlace();
+      
+      
+    }, [] );
   
     const  [ place, setPlace] = useState('');
-    const getPlace = (idPlace) => {
-      fetch(
-        `${BASE_URL}/places/${idPlace}/?fields=title`
+    const getPlace = async()  => {
+     await fetch(
+        `${BASE_URL}/places/${placeId}/?fields=title`
       ).then(async response => {
         if (response.status !== 200) {
           return;
@@ -23,7 +26,7 @@ const List = ({name,description,image, placeId,onShowMore, id})=>{
         setPlace(data.title);
       });
     };
-    
+
 return (
 <div className='list-item'>
     <div className = 'list-item__title'>{name}</div>
@@ -35,7 +38,7 @@ return (
 
     <div className='list-item__img'><img src = {image} alt=''/></div>
     
-    <button className='list-item__more'>подробнее</button>
+    <button className='list-item__more' onClick={() => onItemSelected(id)}>подробнее</button>
     </div>
 )
 

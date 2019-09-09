@@ -6,11 +6,17 @@ import './app.css';
 const App = () => {
   const BASE_URL = "https://kudago.com/public-api/v1.4/";
 
+
+
+
   useEffect(() => {
     getEvents();
+    onEventSelected()
+    console.log(eventsId)
   }, []);
 
   const  [ events, setEvents] = useState([]);
+  const  [ eventsId, setEventsId] = useState('');
   const getEvents = () => {
     fetch(
       `${BASE_URL}/events?fields=dates,images,description,id,title,place&lang=ru&location=nsk`
@@ -27,18 +33,20 @@ const App = () => {
 
 
   };
-
+ const onEventSelected = (id) => {
+      setEventsId(id)
+  };
 
 
   return (
         <div  className='app'>
        <div>
         {events.map(event =>(
-               <List name ={event.title} key={event.id} description = {event.description} image={event.images[0].image} placeId={event.place.id} id={event.id} />
+               <List name ={event.title} key={event.id} description = {event.description} image={event.images[0].image} placeId={event.place.id} id={event.id} onItemSelected={onEventSelected} />
 
         ))}
         </div>
-            <CartEvent />
+            <CartEvent selectId = {eventsId}/>
          
     </div>
   );
